@@ -1,11 +1,10 @@
 # Concept Description and Basic Gameplay
 
-Our game is a fighting one based on the ability for multiple players to login and compete against each other. Our basic gameplay is based off of wasd direcitons and can perhaps be developed differently later for mobile.
-Four pixel-based players of differing colors will be placed into the "arena" as they enter the game. Extra players will either play on a different stage or have to wait in a queue until they are allowed in.
-We have several ideas for what type of fighting game we could make. One idea was a giant pillow-fight. Another was the generic jump/kick/punch that we were planning on doing. It would include projectile powerups that could be thrown at other players.
-We also toyed with the idea of a rotating screen vs a scrolling screen vs. a looping screen.
+The project is a fighting game and is based on the ability for multiple players to login and compete against each other. The basic gameplay will have WASD directions. If possible, a version will be made for mobile or tweaks will be made to make it more mobile friendly. Four pixel-based players of differing colors will be placed into the "arena" like level as they enter the game. There will be differing levels but the number has yet to be decided. Extra players will either play on a different stage or have to wait in a queue until they are allowed in. These extra players may be allowed to spectate an ongoing match if they want till a server instance is available. 
 
-**Note:** I'm not sure what we've decided for each of these things, so I put together a partial pros/cons list. If we've actually decided on something, we can ~~strike out~~ the things we don't want.
+There are several possible ideas for an overall theme. One idea was a giant pillow-fight. Another was more of a tag system. What is important to note is that it fill focus on the generic jump/kick/punch of most fighting games. It will also include projectile powerups that could be thrown at other players and may have additional power ups. Each player will have a yet to be determined amount of health. The screen will either be rotating, scrolling or a looping screen. This has also yet to be decided.
+
+**Note:** Pros/Cons list created to help come to informed decisions. If we've actually decide on something, we can ~~strike out~~ the things we don't want.
 
 ## Pros/Cons:
 Here are some Pros/Cons for each:
@@ -32,9 +31,9 @@ How will we handle more than one player?
 ### Gameplay:
 How will we control the players?
 
-#### WASD - directional (computer-first):
+#### WASD - directional (Computer-First):
 ##### Pros:
-- It is much eaiser to control the characters in WASD.
+- It is much easier to control the characters in WASD.
 - Allows for other keys to be used to do other things like shoot and switch weapons (if needed).
 - Leaves the right hand free if we want to use the mouse
 for aiming, etc.
@@ -43,7 +42,7 @@ for aiming, etc.
 - Becomes a pain in the neck if we want to transfer it to mobile later.
 - People have to have a keyboard to play.
 
-#### Mouse and Click (phone-first):
+#### Mouse and Click (Phone-First):
 ##### Pros:
 - Will make it easier to convert to phones later.
 - Mobile devices are more wide-spread, meaning it will be more convenient for players to join, and they can play anywhere they want.
@@ -68,12 +67,18 @@ What will our basic stage be like?
 
 #### Scrolling Screen:
 ##### Pros:
--
+- Allows a lot of room for players
+- not too difficult to code
 ##### Cons:
--
+- Too much room might make it hard to find other players
+- would have to be sort of generic in design to scroll infinitely
 
 #### Looping Screen:
 ##### Pros:
--
+- "POW" level- exit one side come out the other- simple
+- not too difficult to code
+- allows for interesting design elements.
 ##### Cons:
--
+- Might be slightly confusing depending on the size of the arena
+- Players might be able to hide in the "cusp" between sides
+- Could be slightly jarring 
