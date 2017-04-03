@@ -1,13 +1,13 @@
 # Concept Description and Basic Gameplay
 
-The project is a fighting game and is based on the ability for multiple players to login and compete against each other. The basic gameplay will have WASD directions. If possible, a version will be made for mobile or tweaks will be made to make it more mobile friendly. Four pixel-based players of differing colors will be placed into the "arena" like level as they enter the game. There will be differing levels but the number has yet to be decided. Extra players will either play on a different stage or have to wait in a queue until they are allowed in. These extra players may be allowed to spectate an ongoing match if they want till a server instance is available. 
+The project is a fighting game and is based on the ability for multiple players to login and compete against each other. The basic gameplay will either have WASD directions or Mouse click as a means of control. If possible, a version will be made for mobile or tweaks will be made to make it more mobile friendly. Four pixel-based players of differing colors will be placed into the "arena" like level as they enter the game. There will be differing levels but the number has yet to be decided. Extra players will either play on a different stage or have to wait in a queue until they are allowed in. These extra players may be allowed to spectate an ongoing match if they want till a server instance is available. 
 
 There are several possible ideas for an overall theme. One idea was a giant pillow-fight. Another was more of a tag system. What is important to note is that it fill focus on the generic jump/kick/punch of most fighting games. It will also include projectile powerups that could be thrown at other players and may have additional power ups. Each player will have a yet to be determined amount of health. The screen will either be rotating, scrolling or a looping screen. This has also yet to be decided.
 
 **Note:** Pros/Cons list created to help come to informed decisions. If we've actually decide on something, we can ~~strike out~~ the things we don't want.
 
 ## Pros/Cons:
-Here are some Pros/Cons for each:
+Here are some Pros/Cons for each!
 
 ### Multi-Player handling:
 How will we handle more than one player?
