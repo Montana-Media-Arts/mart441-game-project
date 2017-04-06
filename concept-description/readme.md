@@ -1,4 +1,4 @@
-# Concept Description and Basic Gameplay
+## Concept Description and Basic Gameplay
 
 The project is a fighting game and is based on the ability for multiple players to login and compete against each other. The basic gameplay will have WASD and Arrow keys for control. If possible, a version will be made for mobile or tweaks will be made to make it more mobile friendly. Four pixel-based players of differing colors will be placed into the "arena" like level as they enter the game. There will be differing levels but the number has yet to be decided. Extra players will either play on a different stage or have to wait in a queue until they are allowed in. These extra players may be allowed to spectate an ongoing match if they want till a server instance is available. Players will have control of their own gravity, allowing for unique and strategic gameplay. 
 
@@ -6,7 +6,7 @@ There are several possible ideas for an overall theme. [Yet to be decided] One i
 
 <hr>
 
-#### Current Decisions
+## Current Decisions
 - Both WASD & Arrow Keys
 - Player controls gravity with arrow keys
 - Only player is affected by their own unique gravity
@@ -20,10 +20,10 @@ Here are some Pros/Cons for each!
 
 <hr>
 
-### Multi-Player handling:
+### Multi-Player Handling:
 How will we handle more than one player?
 
-#### New stages:
+#### New Stages:
 ##### Pros:
 - Will allow players to enter the game right away.
 - May allow players that are less experienced with the game to enter with other players who are inexperienced.
@@ -46,7 +46,7 @@ How will we handle more than one player?
 ### Gameplay:
 How will we control the players?
 
-#### WASD - directional (Computer-First):
+#### WASD - Directional (Computer-First):
 
 ##### Pros:
 - It is much easier to control the characters in WASD.
@@ -71,7 +71,7 @@ for aiming, etc.
 ### Screen Layout:
 What will our basic stage be like?
 
-#### Rotating screen:
+#### Rotating Screen:
 ##### Pros:
 - Players have control over more surface area.
 - It's a creative solution to having a limited screen that doesn't scroll or loop.
