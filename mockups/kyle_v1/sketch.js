@@ -1,65 +1,98 @@
-var pxa = 0;
-var pxb = 50;
-var pya = 600;
-var pyb = 100;
+var r=0;
 
-//fist
-var fx = 0;
-var fy = 650;
-var fxb = 50;
-var fyb = 15;
+var plyr = [];
 
 var vxa = 650;
 var vxb = 50;
 var vya = 600;
 var vyb = 100;
 
-function setup() {
-    createCanvas(1000, 700);
+//jump
+var falling = false;
+var jump = false;
+var landed = true;
+var w_down = false;
+var ground;
 
+function setup() {
+  createCanvas(windowWidth, windowHeight);
+  plyr = new Player();
+  ground = windowHeight-100;
 }
+
+
 
 function draw() {
-    background('blue');
-    fill('orange');
-    rect(vxa, vya, vxb, vyb);
+  background('blue');
+  fill('orange');
+  rect(vxa, vya, vxb, vyb);
 
-    if (keyIsDown(LEFT_ARROW)) {
-        pxa -= 5;
-    }
-    if (keyIsDown(RIGHT_ARROW)) {
-        pxa += 5;
-    }
-    if (keyIsDown(UP_ARROW) && pya >= 450) {
-        pya -= 5;
-    } else if (pya < 600) {
-        pya += 5;
-    }
+  plyr.draw();
 
-    //punch
-    if (keyIsDown(83)) {
-        fx = pxa + 50;
-    } else {
-        fx = pxa;
-    }
-    fill('red');
-    rect(pxa, pya, pxb, pyb);
-    rect(fx, pya + 30, fxb, fyb);
+  if (keyIsDown(65)) {
+    plyr.pos.x -= 5;
+  }
+  if (keyIsDown(68)) {
+    plyr.pos.x += 5;
+  }
 
 
+  //punch
+  if (keyIsDown(83)) {
+    plyr.attackpos.x = plyr.pos.x + 50;
+  } else {
+    plyr.attackpos.x = plyr.pos.x;
+  }
+
+  //jump
+  //startjump
+  if (w_down & landed) {
+    landed = false;
+    plyr.startjump();
+    jump = true;
+  }
+  if (w_down & jump & plyr.pos.y>=ground-200) {
+    plyr.pos.y-=25;
+
+  } else {
+    jump= false;
+}
+    if(plyr.pos.y<ground){
+      plyr.pos.y+=25;
+    } else if(!w_down) {
+      if (!landed) {
+        landed=true;
+        plyr.stopjump();
+      }
+    }
+
+
+    if (keyIsDown(82)){
+      plyr.pos.y--
+    }
     //hit
-    if (keyIsDown(83) && fx + 50 < vxa + 50 && fx + 50 > vxa && fy < vya + 100 && fy > vya) {
-        vxa = random(0, 900);
-        vya = random(0, 600);
+    if (attack=true && plyr.attackpos.x + 50 < vxa + 50 && plyr.attackpos.x + 50 > vxa && plyr.attackpos.y < vya + 100 && plyr.attackpos.y > vya) {
+      vxa = random(0, 900);
+      vya = random(0, 600);
     }
 
-}
+  }
 
-function keyPressed() {
-    if (keyCode === UP_ARROW && pya >= 450) {
-        pya -= 5;
-    } else if (pya < 600) {
-        pya += 5;
+
+  //fast type keys
+  //jump
+  function keyTyped() {
+    if (key==='w') {
+      w_down = true;
     }
+    if (key==='d') {
+      d_down = true;
+    }
+  }
 
-}
+  function keyReleased() {
+    a_down = false;
+    d_down = false;
+  }
+
+ console.log(w_down)
