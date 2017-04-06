@@ -1,16 +1,24 @@
 # Concept Description and Basic Gameplay
 
-The project is a fighting game and is based on the ability for multiple players to login and compete against each other. The basic gameplay will either have WASD directions or Mouse click as a means of control. If possible, a version will be made for mobile or tweaks will be made to make it more mobile friendly. Four pixel-based players of differing colors will be placed into the "arena" like level as they enter the game. There will be differing levels but the number has yet to be decided. Extra players will either play on a different stage or have to wait in a queue until they are allowed in. These extra players may be allowed to spectate an ongoing match if they want till a server instance is available.
+The project is a fighting game and is based on the ability for multiple players to login and compete against each other. The basic gameplay will have WASD and Arrow keys for control. If possible, a version will be made for mobile or tweaks will be made to make it more mobile friendly. Four pixel-based players of differing colors will be placed into the "arena" like level as they enter the game. There will be differing levels but the number has yet to be decided. Extra players will either play on a different stage or have to wait in a queue until they are allowed in. These extra players may be allowed to spectate an ongoing match if they want till a server instance is available. Players will have control of their own gravity, allowing for unique and strategic gameplay. 
 
-There are several possible ideas for an overall theme. One idea was a giant pillow-fight. Another was more of a tag system. What is important to note is that it fill focus on the generic jump/kick/punch of most fighting games. It will also include projectile powerups that could be thrown at other players and may have additional power ups. Each player will have a yet to be determined amount of health. The screen will either be rotating, scrolling or a looping screen. This has also yet to be decided.
+There are several possible ideas for an overall theme. [Yet to be decided] One idea was a giant pillow-fight. Another was more of a tag system. What is important to note is that it fill focus on the generic jump/kick/punch of most fighting games. It will also include projectile powerups that could be thrown at other players and may have additional power ups. Each player will have a yet to be determined amount of health. The screen will either be rotating, scrolling or a looping screen. [This has also yet to be decided.]
 
-**Note:** Pros/Cons list created to help come to informed decisions. If we've actually decide on something, we can ~~strike out~~ the things we don't want.
+#### Current Decisions
+
+- Both WASD & Arrow Keys
+- Player controls gravity with arrow keys
+- Only player is affected by their own unique gravity
+- Screen doesnt rotate with player [Might in the future]
+
+**Note:** Pros/Cons list created to help come to informed decisions. If we've actually decide on something, we can ~~strike out~~ the things we don't want. [Left originals here in case there is a change in development!]
 
 ## Pros/Cons:
 Here are some Pros/Cons for each!
 
 ### Multi-Player handling:
 How will we handle more than one player?
+
 #### New stages:
 ##### Pros:
 - Will allow players to enter the game right away.
@@ -19,6 +27,7 @@ How will we handle more than one player?
 ##### Cons:
 - May take more coding and more memory to put together
 - May be difficult to coordinate.
+
 #### Queue:
 ##### Pros:
 - It is unnecessary to make other stages.
@@ -33,10 +42,6 @@ How will we control the players?
 
 #### WASD - directional (Computer-First):
 
-#### Current Decision
-
-Both WASD & Arrow Keys
-
 ##### Pros:
 - It is much easier to control the characters in WASD.
 - Allows for other keys to be used to do other things like shoot and switch weapons (if needed).
@@ -47,7 +52,7 @@ for aiming, etc.
 - Becomes a pain in the neck if we want to transfer it to mobile later.
 - People have to have a keyboard to play.
 
-#### Mouse and Click (Phone-First):
+~~#### Mouse and Click (Phone-First):~~
 ##### Pros:
 - Will make it easier to convert to phones later.
 - Mobile devices are more wide-spread, meaning it will be more convenient for players to join, and they can play anywhere they want.
@@ -70,7 +75,7 @@ What will our basic stage be like?
 - May be difficult to code for individual control (and perspective).
 - May be confusing for people just entering.
 
-#### Scrolling Screen:
+~~#### Scrolling Screen:~~
 ##### Pros:
 - Allows a lot of room for players
 - not too difficult to code
@@ -78,7 +83,7 @@ What will our basic stage be like?
 - Too much room might make it hard to find other players
 - would have to be sort of generic in design to scroll infinitely
 
-#### Looping Screen:
+~~#### Looping Screen:~~
 ##### Pros:
 - "POW" level- exit one side come out the other- simple
 - not too difficult to code
