@@ -4,7 +4,7 @@ function Player() {
 this.size = { w:50 , h:100};
 this.attackpos = createVector(this.pos.x, this.pos.y/.5);
 this.attacksize = {w:10 , h:10};
-this.isjumping=false;
+this.isjumping = false;
  this.color = ['red','orange','green','pink'];
 
 
@@ -18,9 +18,9 @@ Player.prototype.draw=function(){
 
 
 Player.prototype.startjump = function () {
-  this.isjumping=true;
+  this.isjumping = true;
 };
 
 Player.prototype.stopjump = function () {
-this.isjumping=false;
+this.isjumping = false;
 };
