@@ -52,7 +52,7 @@ for aiming, etc.
 - Becomes a pain in the neck if we want to transfer it to mobile later.
 - People have to have a keyboard to play.
 
-~~#### Mouse and Click (Phone-First):~~
+#### ~~Mouse and Click (Phone-First):~~
 ##### Pros:
 - Will make it easier to convert to phones later.
 - Mobile devices are more wide-spread, meaning it will be more convenient for players to join, and they can play anywhere they want.
@@ -75,7 +75,7 @@ What will our basic stage be like?
 - May be difficult to code for individual control (and perspective).
 - May be confusing for people just entering.
 
-~~#### Scrolling Screen:~~
+#### ~~Scrolling Screen:~~
 ##### Pros:
 - Allows a lot of room for players
 - not too difficult to code
@@ -83,7 +83,7 @@ What will our basic stage be like?
 - Too much room might make it hard to find other players
 - would have to be sort of generic in design to scroll infinitely
 
-~~#### Looping Screen:~~
+#### ~~Looping Screen:~~
 ##### Pros:
 - "POW" level- exit one side come out the other- simple
 - not too difficult to code
