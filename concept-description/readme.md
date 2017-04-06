@@ -4,17 +4,21 @@ The project is a fighting game and is based on the ability for multiple players 
 
 There are several possible ideas for an overall theme. [Yet to be decided] One idea was a giant pillow-fight. Another was more of a tag system. What is important to note is that it fill focus on the generic jump/kick/punch of most fighting games. It will also include projectile powerups that could be thrown at other players and may have additional power ups. Each player will have a yet to be determined amount of health. The screen will either be rotating, scrolling or a looping screen. [This has also yet to be decided.]
 
-#### Current Decisions
+<hr>
 
+#### Current Decisions
 - Both WASD & Arrow Keys
 - Player controls gravity with arrow keys
 - Only player is affected by their own unique gravity
 - Screen doesnt rotate with player [Might in the future]
 
-**Note:** Pros/Cons list created to help come to informed decisions. If we've actually decide on something, we can ~~strike out~~ the things we don't want. [Left originals here in case there is a change in development!]
+<hr>
 
 ## Pros/Cons:
 Here are some Pros/Cons for each!
+- Pros/Cons list created to help come to informed decisions. If we've actually decide on something, we can ~~strike out~~ the things we don't want. [Left originals here in case there is a change in development!]
+
+<hr>
 
 ### Multi-Player handling:
 How will we handle more than one player?
@@ -36,6 +40,8 @@ How will we handle more than one player?
 ##### Cons:
 - Players may have to wait a long time before being able to play.
 - Players may drop out if they have to wait for a while.
+
+<hr>
 
 ### Gameplay:
 How will we control the players?
@@ -59,6 +65,8 @@ for aiming, etc.
 ##### Cons:
 - The movements and strikes may be slightly more difficult to control than they woud be with keystrokes.
 - Less options if you want more than striking.
+
+<hr>
 
 ### Screen Layout:
 What will our basic stage be like?
