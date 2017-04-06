@@ -8,3 +8,11 @@ var io = require("socket.io")(server);
 
 //We're using express.middleWare()
 app.use(express.static("./public"));
+
+
+io.on("connection", function(socket){
+	socket.emit("datafromserver", "hahaEE");
+
+	console.log("A user connected.");
+
+});
