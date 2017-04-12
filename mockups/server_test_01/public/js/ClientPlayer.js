@@ -65,12 +65,6 @@ class ClientPlayer {
         this.pos.add(this.vel);
     }
 
-    setIdx(idx) {
-        this.idx = idx;
-        this.emitData.idx = idx;
-        console.log("My Idx is: " + me.idx);
-    }
-
 
     emit() {
 
@@ -83,6 +77,13 @@ class ClientPlayer {
         // console.log(this.emitData);
 
         socket.emit('player', this.emitData);
+    }
+
+
+    setIdx(idx) {
+        this.idx = idx;
+        this.emitData.idx = idx;
+        console.log("My Idx is: " + me.idx);
     }
 
 }
