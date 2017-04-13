@@ -22,7 +22,7 @@ function draw() {
     background(bg);
 
     // call the player object methods
-    me.frame();
+    me.frame(othersIdx,otherPlayers);
 
     for (var i = 0; i < othersIdx.length; i++) {
         if (otherPlayers[othersIdx[i]]) {
