@@ -90,6 +90,11 @@ socket.on("player_data", function(player_data) {
 
 });
 
+socket.on('hit player', function(data){
+	me.pos.y = 0;
+	console.log(data);
+});
+
 socket.on("disconnect_player", function(disconnect_id) {
     othersIdx.splice(disconnect_id, 1);
     delete otherPlayers[disconnect_id.toString()];

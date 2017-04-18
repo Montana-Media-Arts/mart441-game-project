@@ -26,6 +26,8 @@ class ClientPlayer {
 		// colors for Players
 		this.color = ['red', 'goldenrod', 'green', 'salmon', 'blue']
 
+		this.hitsLanded = 0;
+
 		this.emitData = {
 			idx: this.idx,
 			pos: {
@@ -40,7 +42,8 @@ class ClientPlayer {
 				x: 0,
 				y: 0
 			},
-			size: this.size
+			size: this.size,
+			hitsLanded: 0
 		};
 	}
 
@@ -48,7 +51,7 @@ class ClientPlayer {
 		this.move();
 		this.display();
 		this.emit();
-		this.attackdetect(othersIdx,otherPlayers);
+		// this.attackdetect(othersIdx,otherPlayers);
 		this.hitdetect(othersIdx,otherPlayers);
 	}
 
@@ -111,25 +114,26 @@ class ClientPlayer {
 		}
 
 	}
-
-	attackdetect(othersIdx,otherPlayers){
-		for (var i = 0; i < othersIdx.length; i++) {
-			var op = otherPlayers[othersIdx[i]]
-			if (op) {
-				if ( this.attackpos.x>=op.pos.x && this.attackpos.x<=op.pos.x+50 && this.attackpos.y>=op.pos.y && this.attackpos.y<=op.pos.y+100 && keyIsDown(32)) {
-					op.pos.y-=1000;
-					console.log('opponent hit')
-				}
-			}
-		}
-	}
+// Commented out for now
+	// attackdetect(othersIdx,otherPlayers){
+	// 	for (var i = 0; i < othersIdx.length; i++) {
+	// 		var op = otherPlayers[othersIdx[i]]
+	// 		if (op) {
+	// 			if ( this.attackpos.x>=op.pos.x && this.attackpos.x<=op.pos.x+50 && this.attackpos.y>=op.pos.y && this.attackpos.y<=op.pos.y+100 && keyIsDown(32)) {
+	// 				op.pos.y-=1000;
+	// 				console.log('opponent hit')
+	// 			}
+	// 		}
+	// 	}
+	// }
 	hitdetect(othersIdx,otherPlayers){
 		for (var i = 0; i < othersIdx.length; i++) {
 			var op = otherPlayers[othersIdx[i]]
 			if (op) {
 				if ( op.attackpos.x>=this.pos.x && op.attackpos.x<=this.pos.x+50 && op.attackpos.y>=this.pos.y && op.attackpos.y<=this.pos.y+100 && keyIsDown(32)) {
-					this.pos.y-=1000;
-					console.log('player hit')
+					this.hitsLanded++;
+					console.log('player hit', this.hitsLanded);
+					socket.emit('player hit', othersIdx[i]);
 				}
 			}
 		}
@@ -140,6 +144,7 @@ class ClientPlayer {
 		this.emitData.pos.y = this.pos.y;
 		this.emitData.fistPos.x = this.attackpos.x;
 		this.emitData.fistPos.y = this.attackpos.y;
+		this.emitData.hitsLanded = this.hitsLanded;
 		socket.emit('player', this.emitData);
 	}
 
