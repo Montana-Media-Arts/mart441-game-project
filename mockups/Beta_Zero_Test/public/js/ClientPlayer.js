@@ -9,7 +9,9 @@ class ClientPlayer {
 
 		// Foot not head
 		this.pos = createVector(800 / 2, 600 - 100);
-		this.attackpos = createVector(this.pos.x, this.pos.y)
+		this.attackpos = createVector(this.pos.x, this.pos.y);
+		this.attackvel = 5;
+		this.attackaccel = 1;
 		this.attacksize = {
 			w: 25,
 			h: 25
@@ -84,8 +86,10 @@ class ClientPlayer {
 		// Left-WASD
 		if (keyIsDown(65) && this.pos.x >= 0) {
 			this.pos.x -= 5;
-			if (keyIsDown(32)) {
-				this.attackpos.x = this.pos.x - 35.5;
+			if (keyIsDown(32) && this.attackpos.x == this.pos.x + 15.5) {
+
+				this.attackpos.x = this.pos.x - 35.5 + this.attackvel;
+				this.attackvel += this.attackacc;
 			} else {
 				this.attackpos.x = this.pos.x + 15.5;
 			}
