@@ -9,9 +9,7 @@ class ClientPlayer {
 
         // Foot not head
         this.pos = createVector(800 / 2, 600 - 100);
-        this.attackacc = .125;
-        this.attackvel = 0;
-        this.attackpos = createVector(this.pos.x += this.attackvel, this.pos.y);
+        this.attackpos = createVector(this.pos.x, this.pos.y);
         this.attacksize = {
             w: 25,
             h: 25
@@ -50,7 +48,7 @@ class ClientPlayer {
             },
             size: this.size,
             hitsLanded: 0
-        };
+        }
     }
 
     frame(othersIdx, otherPlayers) {
@@ -115,6 +113,7 @@ class ClientPlayer {
     }
 }
 
+
 // Jump = w
 // Up
 if (keyIsDown(87) && this.pos.y >= this.ground) {
@@ -128,7 +127,6 @@ if (this.pos.y > this.ground) {
     this.pos.y = this.ground;
 }
 
-}
 hitdetect(othersIdx, otherPlayers) {
     for (var i = 0; i < othersIdx.length; i++) {
         var op = otherPlayers[othersIdx[i]]
@@ -140,7 +138,7 @@ hitdetect(othersIdx, otherPlayers) {
             }
         }
     }
-}
+
 emit() {
     // Update values
     this.emitData.pos.x = this.pos.x;
