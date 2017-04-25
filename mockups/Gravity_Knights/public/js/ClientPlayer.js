@@ -48,7 +48,7 @@ class ClientPlayer {
             },
             size: this.size,
             hitsLanded: 0
-        }
+        };
     }
 
     frame(othersIdx, otherPlayers) {
@@ -110,8 +110,7 @@ class ClientPlayer {
                 this.canPunch = true;
             }
         }
-    }
-}
+
 
 
 // Jump = w
@@ -138,7 +137,7 @@ hitdetect(othersIdx, otherPlayers) {
             }
         }
     }
-
+}
 emit() {
     // Update values
     this.emitData.pos.x = this.pos.x;
