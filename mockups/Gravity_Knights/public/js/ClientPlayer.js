@@ -9,8 +9,6 @@ class ClientPlayer {
 
         // Foot not head
         this.pos = createVector(800 / 2, 600 - 100);
-        this.attackacc = .125;
-        this.attackvel = 0;
         this.attackpos = createVector(this.pos.x += this.attackvel, this.pos.y);
         this.attacksize = {
             w: 25,
