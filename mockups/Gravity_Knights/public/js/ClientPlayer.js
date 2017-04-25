@@ -20,9 +20,9 @@ class ClientPlayer {
 		this.gravity = 1;
 		this.ground = 600 - 100;
 		this.velocity = 0;
-		this.isattacking = false;
+		this.direction;
 		this.attackvel = 0;
-		this.attackacc = 10;
+		this.attackacc = .25;
 
 		// size should be 0-100
 		this.size = 100;
@@ -101,40 +101,48 @@ class ClientPlayer {
 		// //////////
 		// Left-WASD
 		if (keyIsDown(65) && this.pos.x >= 0) {
-			this.pos.x -= 5;
-			if (this.attackpos.x >= this.pos.x + 15.5){
-				if (keyIsDown(32)) {
-					this.attackvel = -100;
-				}
-				else {
-					this.attackvel = 0;
-				}
+				this.pos.x -= 5;
+				this.direction = true;
+		}
+		else if (keyIsDown(68) && this.pos.x <= 800 - 50) {
+				this.pos.x += 5;
+				this.direction = false;
+		}
+
+
+
+
+		if ( this.attackpos.x > this.pos.x + 15.5){
+			if (this.direction == true && keyIsDown(32)) {
+					this.attackvel = -70;
 			}
 			else{
-				this.attackvel += this.attackacc;
+				this.attackvel = 0;
 			}
+		}
+		else{
+				this.attackvel -= this.attackacc;
+		}
+
 			// else {
 			// 	this.attackpos.x = this.pos.x + 15.5;
 			// }
-		}
 	// else{
 	// 		this.attackpos.x = this.pos.x + 15.5;
 	// }
 		// Right
-		if (keyIsDown(68) && this.pos.x <= 800 - 50) {
-			this.pos.x += 5;
-			if (this.attackpos.x <= this.pos.x +15.5){
-				if (keyIsDown(32)) {
-					this.attackvel = 100;
-				}
-				else {
-					this.attackvel = 0;
-				}
+
+		if (this.attackpos.x < this.pos.x + 15.5){
+			if (this.direction == false  && keyIsDown(32)) {
+				this.attackvel = 70;
 			}
 			else{
-					this.attackvel += -1*this.attackacc;
-				}
+				this.attackvel = 0;
 			}
+		}
+		else{
+				this.attackvel += this.attackacc;
+		}
 			// else{
 			// 	this.attackpos.x = this.pos.x + 15.5;
 			// }
