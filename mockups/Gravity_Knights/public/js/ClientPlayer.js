@@ -9,8 +9,9 @@ class ClientPlayer {
 
 		// Foot not head
 		this.pos = createVector(800 / 2, 600 - 100);
-
-		this.attackpos = createVector(this.pos.x, this.pos.y);
+		this.attackacc = .125;
+		this.attackvel = 0;
+		this.attackpos = createVector(this.pos.x += this.attackvel, this.pos.y);
 		this.attacksize = {
 			w: 25,
 			h: 25
@@ -21,8 +22,7 @@ class ClientPlayer {
 		this.ground = 600 - 100;
 		this.velocity = 0;
 		this.direction;
-		this.attackvel = 0;
-		this.attackacc = .25;
+
 
 		// size should be 0-100
 		this.size = 100;
@@ -121,7 +121,7 @@ class ClientPlayer {
 			}
 		}
 		else{
-				this.attackvel -= this.attackacc;
+				this.attackvel += this.attackacc;
 		}
 
 			// else {
@@ -141,7 +141,7 @@ class ClientPlayer {
 			}
 		}
 		else{
-				this.attackvel += this.attackacc;
+				this.attackvel -= this.attackacc;
 		}
 			// else{
 			// 	this.attackpos.x = this.pos.x + 15.5;
