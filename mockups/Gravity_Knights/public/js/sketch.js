@@ -82,8 +82,8 @@ socket.on("player_data", function(player_data) {
                 playerCurr.size = playerServer.size;
                 playerCurr.pos.x = playerServer.pos.x;
                 playerCurr.pos.y = playerServer.pos.y;
-				playerCurr.attackpos.y = playerServer.fistPos.y;
-				playerCurr.attackpos.x = playerServer.fistPos.x;
+				        playerCurr.attackpos.y = playerServer.fistPos.y;
+				        playerCurr.attackpos.x = playerServer.fistPos.x;
             }
         }
     }
