@@ -4,6 +4,7 @@ class ClientPlayer {
     constructor( /*img*/ ) {
         // For implementing sprites
         // this.img = img;
+
         // Unique player ID
         this.idx = null;
 
@@ -74,6 +75,7 @@ class ClientPlayer {
         pop();
     }
 
+
     move() {
         this.attackpos.x = this.pos.x + 15.5;
         this.attackpos.y = this.pos.y + 20;
@@ -84,24 +86,24 @@ class ClientPlayer {
         } else {
             this.gravity = 1;
         }
-        // Left-WASD
-        if (keyisDown(65) && this.pos.x >= 0) {
+        // Left-A
+        if (keyIsDown(65) && this.pos.x >= 0) {
             this.pos.x -= 5;
             this.direction = 1;
         }
-        // Right-WASD
+        // Right-D
         else if (keyIsDown(68) && this.pos.x >= 0) {
             this.pos.x += 5;
             this.direction = 0;
         }
-        // Punching-Space
+        // Punching-Space bar
         if (this.punchTimer >= 3 * frameRate()) {
             this.canPunch = false;
             this.punchTimer = 0;
         } else if (keyIsDown(32) && this.direction == 1 && this.canPunch) {
             this.attackpos.x = this.pos.x - 35.5;
             this.punchTimer++;
-        } else if (keyisDowm(32) && this.direction == 0 && this.canPunch) {
+        } else if (keyIsDown(32) && this.direction == 0 && this.canPunch) {
             this.attackpos.x = this.pos.x + 60;
             this.punchTimer++;
         } else {
@@ -110,8 +112,6 @@ class ClientPlayer {
                 this.canPunch = true;
             }
         }
-
-
 
 // Jump = w
 // Up
@@ -124,6 +124,7 @@ else {
 }
 if (this.pos.y > this.ground) {
     this.pos.y = this.ground;
+  }
 }
 
 hitdetect(othersIdx, otherPlayers) {
@@ -138,6 +139,8 @@ hitdetect(othersIdx, otherPlayers) {
         }
     }
 }
+
+
 emit() {
     // Update values
     this.emitData.pos.x = this.pos.x;
