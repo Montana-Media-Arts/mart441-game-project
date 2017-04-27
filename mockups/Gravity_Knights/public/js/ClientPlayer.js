@@ -17,7 +17,7 @@ class ClientPlayer {
 		};
 		this.isjumping = false;
 		this.maxSpeed = 10;
-		this.gravity = 1;
+		this.gravity = -1;
 		this.ground = 600 - 100;
 		this.velocity = 0;
 		this.isattacking = false;
@@ -84,7 +84,7 @@ class ClientPlayer {
 			this.gravity = 0;
 			this.velocity = 0;
 		} else {
-			this.gravity = 1;
+			this.gravity = -1;
 		}
 
 		// //////////////
