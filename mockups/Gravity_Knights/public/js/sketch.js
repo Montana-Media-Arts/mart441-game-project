@@ -7,7 +7,7 @@ var otherPlayers = {};
 //var img;
 
 function setup() {
-    createCanvas(800, 800);
+    createCanvas(800, 600);
     bg = color('powderblue');
     background(bg);
 
