@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-body {
-  background-image: url("images/red.jpg");
-}
-=======
+
+
 @font-face {
     font-family: 'SinkinSans';
     src: url('../fonts/SinkinSans-400Regular-webfont.woff') format('woff'), url('../fonts/SinkinSans-400Regular-webfont.svg') format('svg');
@@ -163,6 +160,3 @@ ul#menu li a {
 ul#menu li a:hover {
     /*background-color: gold*/
 }
-
-
->>>>>>> 4c48a229b23f16f456f5a64417b2147637808da8
