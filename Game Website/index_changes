@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>Mart 441</title>
-      <link rel="stylesheet" type="text/css" href="main.css"/>
+      <link rel="stylesheet" type="text/css" href="main_changes.css"/>
   </head>
   <style>
   #header{
@@ -59,7 +59,7 @@
   </style>
 
   <body style="background-image: url('images/blackBricks.jpg')">
-    <h1 align="center">Gravity Knights</h1>
+    <h1 align="center" style="font: 4em 'Oswald', 'Teen Light', sans-serif;">Gravity Knights</h1>
 
 
    <br>
