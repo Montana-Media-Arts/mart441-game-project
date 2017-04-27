@@ -10,7 +10,7 @@ class ClientPlayer {
         this.idx = null;
 
         // Foot not head
-        this.pos = createVector(800 / 2, 700 - 100);
+        this.pos = createVector(800 / 2, 600 - 100);
         this.attackpos = createVector(this.pos.x, this.pos.y);
         this.attacksize = {
             w: 25,
@@ -19,7 +19,7 @@ class ClientPlayer {
         this.isjumping = false;
         this.maxSpeed = 10;
         this.gravity = 1;
-        this.ground = 700 - 100;
+        this.ground = 600 - 100;
         this.velocity = 0;
         this.direction = 0;
         this.punchTimer = 0;
