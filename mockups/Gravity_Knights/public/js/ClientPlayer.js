@@ -9,7 +9,7 @@ class ClientPlayer {
         this.idx = null;
 
         // Foot not head
-        this.pos = createVector(800 / 2, 600 - 100);
+        this.pos = createVector(800/ 2, 700 - 100);
         this.attackpos = createVector(this.pos.x, this.pos.y);
         this.attacksize = {
             w: 25,
@@ -18,11 +18,13 @@ class ClientPlayer {
         this.isjumping = false;
         this.maxSpeed = 10;
         this.gravity = 1;
-        this.ground = 600 - 100;
+        this.ground = 700 - 100;
         this.velocity = 0;
         this.direction = 0;
         this.punchTimer = 0;
         this.canPunch = true;
+        this.canHit = true;
+        this.hitTimer = 0;
 
 
         // size should be 0-100
@@ -92,7 +94,7 @@ class ClientPlayer {
             this.direction = 1;
         }
         // Right-D
-        else if (keyIsDown(68) && this.pos.x >= 0) {
+        else if (keyIsDown(68) && this.pos.x <= 750) {
             this.pos.x += 5;
             this.direction = 0;
         }
@@ -129,12 +131,18 @@ if (this.pos.y > this.ground) {
 
 hitdetect(othersIdx, otherPlayers) {
     for (var i = 0; i < othersIdx.length; i++) {
-        var op = otherPlayers[othersIdx[i]]
-        if (op) {
-            if (op.attackpos.x >= this.pos.x && op.attackpos.x <= this.pos.x + 50 && op.attackpos.y >= this.pos.y && op.attackpos.y <= this.pos.y + 100 && keyIsDown(32)) {
+        var op = otherPlayers[othersIdx[i]];
+        if (op){
+          if (this.hitTimer >= frameRate()){
+            this.canHit = true;
+            this.hitTimer = 0;
+          }else if (op.attackpos.x >= this.pos.x && op.attackpos.x <= (this.pos.x + 50) && op.attackpos.y >= this.pos.y && op.attackpos.y <= this.pos.y + 100 && keyIsDown(32) && this.canHit){
                 this.hitsLanded++;
+                this.canHit = false;
                 console.log('player hit', this.hitsLanded);
                 socket.emit('player hit', othersIdx[i]);
+            }else if (!this.canHit){
+                this.hitTimer++;
             }
         }
     }
