@@ -1,6 +1,7 @@
 /* jshint esversion: 6 */
 
 class ClientPlayer {
+
     constructor( /*img*/ ) {
         // For implementing sprites
         // this.img = img;
@@ -165,4 +166,5 @@ setIdx(idx) {
     this.emitData.idx = idx;
     console.log("My Idx is: " + me.idx);
 }
+
 }
