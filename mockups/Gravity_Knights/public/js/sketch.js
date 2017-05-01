@@ -15,7 +15,13 @@ function preload() {
 
 
 function setup() {
+<<<<<<< HEAD
     createCanvas(800, 600);
+=======
+    createCanvas(800, 800);
+    bg = color('powderblue');
+    background(bg);
+>>>>>>> origin/master
 
     me = new ClientPlayer(playervis);
 	console.log(me);

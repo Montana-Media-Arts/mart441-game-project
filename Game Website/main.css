@@ -1,34 +1,162 @@
-h1,
-
-h1 a,
 
 
-h1 a:visited { font-family: Georgia, arial, serif; font-size: 38px; }
+@font-face {
+    font-family: 'SinkinSans';
+    src: url('../fonts/SinkinSans-400Regular-webfont.woff') format('woff'), url('../fonts/SinkinSans-400Regular-webfont.svg') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
 
-h1 a,
+body {
+    font-family: 'SinkinSans', serif;
+    /*display: flex;*/
+    flex-flow: wrap;
+    flex-direction: row;
+    color: rgb(0, 0, 0);
+    opacity: 0.9;
+    padding: 10px;
+    background-color: rgb(193, 237, 186)
+}
 
+.content {
+    /* cant get the pictures to have a border around them*/
+    /*align-items: center;*/
+    display: flex;
+    flex-flow: wrap;
+    flex-direction: row;
+    justify-content: space-around;
+    /*text-align: center;*/
+    width: auto;
+    /*flex: 1 1 auto;*/
+    /*padding: 10px;*/
+    /*width: 100%;*/
+}
 
-h1 a:visited { color: #605833; font-family: Georgia, arial, serif; }
+img {
+    border-style: solid;
+    border-width: 10px;
+    border-color: hsl(0, 0%, 21%);
+    /*flex: 1 1 45%;*/
+    /*flex-grow: 1;*/
+    /*flex-shrink: 1;*/
+    /*min-width: 150px;*/
+    width: auto;
+}
 
+.header {
+    color: rgba(122, 122, 122, 0.84);
+    background-color: rgba(32, 77, 119, 0.64) padding: 10px;
+    text-align: center;
+}
 
-h1 a:hover { color: #92864d; text-decoration: none; }
+h1 {
+    font-family: 'Oswald', sans-serif;
+    font-size: 300%;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: .6em;
+}
 
-a,
+h2 {
+    font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif font-size: 4em;
+    /* Cant get this to change size at all!! */
+    color: #544b5e;
+    word-spacing: .1em;
+}
 
+h3 {
+  font-family: 'Oswald', sans-serif;
+  /*font-size: 300%;*/
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: .6em;
+}
 
-a:visited { font-family: Enriqueta; font-size: 16px; color: #92864d; text-decoration: none; }
+p {
+    /* Cant get this text size to change size at all, need bigger */
+    font-size: 30px line-height: 1.2em text-align: justify;
+    text-indent: 20px;
+}
 
+a:link {
+    color: #662e00;
+    text-decoration: none;
+}
 
-a:hover { text-decoration: underline }
+a:visited {
+    color: #5f29fa;
+    font-style: italic;
+    /*this wont work either*/
+}
 
+a:hover {
+    color: #669E90;
+    text-decoration: underline;
+}
 
-p { color: #605833; font-family: Enriqueta; font-size: 16px; padding: 10px 0; }
+a:active {
+    color: #7ac0e7;
+}
 
+p:first-letter {
+    font-size: 130%
+}
 
-.post-info { border-top: 1px dashed #70673b; border-bottom: 1px dashed #70673b; font-size: 13px; margin: 15px 0 15px; padding: 3px; text-transform: uppercase; color: #bfb585; }
+#header {
+    min-height: 80px;
+    align-content: center;
+}
 
+#menu {
+    min-height: 40px;
+}
 
-a.read-more { background-color: #605833; border-radius: 5px 5px 5px 5px; color: white; float: right; font-family: Enriqueta,Arial,sans-serif; text-transform: uppercase; font-size: 16px; padding: 3px 10px; }
+#body {
+    min-height: 400px;
+    margin-top: 3%;
+}
 
+#footer {
+    min-height: 100px;
+    margin-top: 3%;
+}
 
-a.read-more:hover { background-color: #92864d; border-radius: 5px 5px 5px 5px; text-decoration: none; }
+#header, #body, #footer {
+    margin-left: 10%;
+    margin-right: 10%;
+    border: 1px solid black;
+}
+
+@viewport {
+    zoom: 1.0;
+}
+
+@-ms-viewport {
+    width: extend-to-zoom;
+    zoom: 1.0;
+}
+
+ul#menu {
+    padding: 0;
+    font-family: 'Oswald', sans-serif;
+    /*font-size: 300%;
+    font-weight: bold;
+    text-transform: uppercase;*/
+    letter-spacing: .2em;
+
+}
+
+ul#menu li {
+    display: inline;
+}
+
+ul#menu li a {
+
+    text-decoration: none;
+    border-radius: 4px 4px 0 0;
+    padding 10px 40px;
+}
+
+ul#menu li a:hover {
+    /*background-color: gold*/
+}

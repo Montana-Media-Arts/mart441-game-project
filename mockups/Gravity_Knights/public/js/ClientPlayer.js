@@ -1,6 +1,7 @@
 /* jshint esversion: 6 */
 
 class ClientPlayer {
+<<<<<<< HEAD
 
   constructor(playervis) {
     // For implementing sprites
@@ -153,6 +154,29 @@ class ClientPlayer {
       this.attackpos.x = this.pos.x + 15.5;
       if (!keyIsDown(32)) {
         this.runidy=0
+=======
+    constructor( /*img*/ ) {
+        // For implementing sprites
+        // this.img = img;
+
+        // Unique player ID
+        this.idx = null;
+
+        // Foot not head
+        this.pos = createVector(800/ 2, 700 - 100);
+        this.attackpos = createVector(this.pos.x, this.pos.y);
+        this.attacksize = {
+            w: 25,
+            h: 25
+        };
+        this.isjumping = false;
+        this.maxSpeed = 10;
+        this.gravity = 1;
+        this.ground = 700 - 100;
+        this.velocity = 0;
+        this.direction = 0;
+        this.punchTimer = 0;
+>>>>>>> origin/master
         this.canPunch = true;
         console.log(this.canPunch);
       }
@@ -163,6 +187,7 @@ class ClientPlayer {
 
 
 
+<<<<<<< HEAD
     if (keyIsDown(87) && this.pos.y >= this.ground) {
       this.velocity = -25;
 
@@ -194,13 +219,51 @@ class ClientPlayer {
           socket.emit('player hit', othersIdx[i]);
         } else if (!this.canPunch) {
           this.hitTimer++;
+=======
+// Jump = w
+// Up
+if (keyIsDown(87) && this.pos.y >= this.ground) {
+    this.velocity = -25;
+}
+// Fall
+else {
+    this.velocity += this.gravity;
+}
+if (this.pos.y > this.ground) {
+    this.pos.y = this.ground;
+  }
+}
+
+hitdetect(othersIdx, otherPlayers) {
+    for (var i = 0; i < othersIdx.length; i++) {
+        var op = otherPlayers[othersIdx[i]];
+        if (op){
+          if (this.hitTimer >= frameRate()){
+            this.canHit = true;
+            this.hitTimer = 0;
+          }else if (op.attackpos.x >= this.pos.x && op.attackpos.x <= (this.pos.x + 50) && op.attackpos.y >= this.pos.y && op.attackpos.y <= this.pos.y + 100 && keyIsDown(32) && this.canHit){
+                this.hitsLanded++;
+                this.canHit = false;
+                console.log('player hit', this.hitsLanded);
+                socket.emit('player hit', othersIdx[i]);
+            }else if (!this.canHit){
+                this.hitTimer++;
+            }
+>>>>>>> origin/master
         }
       }
     }
+<<<<<<< HEAD
   }
 
 
   emit() {
+=======
+}
+
+
+emit() {
+>>>>>>> origin/master
     // Update values
     this.emitData.pos.x = this.pos.x;
     this.emitData.pos.y = this.pos.y;
@@ -208,6 +271,7 @@ class ClientPlayer {
     this.emitData.fistPos.y = this.attackpos.y;
     this.emitData.hitsLanded = this.hitsLanded;
     socket.emit('player', this.emitData);
+<<<<<<< HEAD
   }
 
 
@@ -216,4 +280,14 @@ class ClientPlayer {
     this.emitData.idx = idx;
     console.log("My Idx is: " + me.idx);
   }
+=======
+}
+
+
+setIdx(idx) {
+    this.idx = idx;
+    this.emitData.idx = idx;
+    console.log("My Idx is: " + me.idx);
+}
+>>>>>>> origin/master
 }
