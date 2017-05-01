@@ -8,33 +8,28 @@ var oppvis;
 
 //var img;
 function preload() {
-  level =loadImage("../vis/map2.jpg")
-  playervis = loadImage("../vis/yellowknight.gif")
-  oppvis = loadImage("../vis/redknight.gif")
+    level = loadImage("../vis/map2.jpg");
+    playervis = loadImage("../vis/yellowknight.gif");
+    oppvis = loadImage("../vis/redknight.gif");
 }
 
 
 function setup() {
-<<<<<<< HEAD
     createCanvas(800, 600);
-=======
-    createCanvas(800, 800);
-    bg = color('powderblue');
-    background(bg);
->>>>>>> origin/master
+
 
     me = new ClientPlayer(playervis);
-	console.log(me);
-  // For loading sprites later
-	// img = loadImage("image.png");
+    console.log(me);
+    // For loading sprites later
+    // img = loadImage("image.png");
 }
 
 function draw() {
 
-  image(level, 0, 0);
+    image(level, 0, 0);
 
     // call the player object methods
-    me.frame(othersIdx,otherPlayers);
+    me.frame(othersIdx, otherPlayers);
 
     for (var i = 0; i < othersIdx.length; i++) {
         if (otherPlayers[othersIdx[i]]) {
@@ -48,7 +43,7 @@ function draw() {
 
 /*************** socket data ***************/
 socket.on("player_num", function(data) {
-	me.setIdx(data);
+    me.setIdx(data);
 });
 
 socket.on("initialize_others", function(data) {
@@ -94,17 +89,17 @@ socket.on("player_data", function(player_data) {
                 playerCurr.size = playerServer.size;
                 playerCurr.pos.x = playerServer.pos.x;
                 playerCurr.pos.y = playerServer.pos.y;
-				        playerCurr.attackpos.y = playerServer.fistPos.y;
-				        playerCurr.attackpos.x = playerServer.fistPos.x;
+                playerCurr.attackpos.y = playerServer.fistPos.y;
+                playerCurr.attackpos.x = playerServer.fistPos.x;
             }
         }
     }
 
 });
 
-socket.on('hit player', function(data){
-	me.pos.y = 0;
-	console.log(data);
+socket.on('hit player', function(data) {
+    me.pos.y = 0;
+    console.log(data);
 });
 
 socket.on("disconnect_player", function(disconnect_id) {
