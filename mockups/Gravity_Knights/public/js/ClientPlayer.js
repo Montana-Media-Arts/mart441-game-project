@@ -3,8 +3,6 @@
 class ClientPlayer {
 
   constructor(playervis) {
-    // For implementing sprites
-
     // Player skin
     this.runidx = 5;
     this.runidy = 0;
