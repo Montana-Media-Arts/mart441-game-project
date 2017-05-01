@@ -3,15 +3,21 @@ var bg;
 var me;
 var othersIdx = [];
 var otherPlayers = {};
+var playervis;
+var oppvis;
 
 //var img;
+function preload() {
+  level =loadImage("../vis/map2.jpg")
+  playervis = loadImage("../vis/yellowknight.gif")
+  oppvis = loadImage("../vis/redknight.gif")
+}
+
 
 function setup() {
     createCanvas(800, 600);
-    bg = color('powderblue');
-    background(bg);
 
-    me = new ClientPlayer(/*img*/);
+    me = new ClientPlayer(playervis);
 	console.log(me);
   // For loading sprites later
 	// img = loadImage("image.png");
@@ -19,7 +25,7 @@ function setup() {
 
 function draw() {
 
-    background(bg);
+  image(level, 0, 0);
 
     // call the player object methods
     me.frame(othersIdx,otherPlayers);
