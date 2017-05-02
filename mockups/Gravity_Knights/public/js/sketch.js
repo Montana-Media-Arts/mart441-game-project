@@ -5,6 +5,7 @@ var othersIdx = [];
 var otherPlayers = {};
 var playervis;
 var oppvis;
+var platformrect = [{x:315, y:187, width:115, height:221}, {x:25, y:274, width:127, height:51}, {x:590, y:274, width:151, height:51}];
 
 // Loads Visuals
 function preload() {
@@ -15,7 +16,7 @@ function preload() {
 
 
 function setup() {
-  createCanvas(800, 600);
+  createCanvas(800 , 600);
 
 
   me = new ClientPlayer(playervis);
@@ -23,8 +24,27 @@ function setup() {
 }
 
 function draw() {
-
   image(level, 0, 0);
+
+  // plat boxes
+  //mid plat
+//   for (var i = 0; i < platformrect.length; i++) {
+//     platformrect[i]
+//   }
+//   if (platformrect[i].x < rect2.x + rect2.width &&
+//    platformrect[i].x + platformrect[i].width > rect2.x &&
+//    platformrect[i].y < rect2.y + rect2.height &&
+//    platformrect[i].height + platformrect[i].y > rect2.y) {
+//     // collision detected!
+// }
+  rect(350, 408, 100,2)
+  rect(350, 187, 100,2)
+  //left plat
+  rect(25, 274, 151,2)
+  rect(25, 325, 151,2)
+  //right plat
+  rect(624, 274, 151,2)
+  rect(624, 325, 151,2)
 
   // call the player object methods
   me.frame(othersIdx, otherPlayers);

@@ -24,18 +24,19 @@ class ClientPlayer {
     this.isjumping = false;
     this.maxSpeed = 10;
     this.gravity = 1;
-    this.ground = 600 - 100;
     this.velocity = 0;
     this.direction = 0;
     this.punchTimer = 0;
     this.canPunch = true;
     this.canPunch = true;
     this.hitTimer = 0;
-
-
+    this.pwidth= 36;
+    this.pheight= 73;
+    this.canmove=true;
+    this.ground = 575-this.pheight;
 
     // size should be 0-100
-    this.size = 100;
+    this.size = 95;
 
 
     this.hitsLanded = 0;
@@ -83,26 +84,31 @@ class ClientPlayer {
 
 
 
+
   move() {
-    // Up - W
-    if (this.isjumping = true && keyIsDown(87) && this.direction == 0) {
-      this.runidx = 8;
+//if right arrow kes is pressed change player width for gravity and rotation of player
+//    if (keyIsDown(37)) {
+//      this.pwidth=95;
+//}
+
+//platforms
+this.canmove=true;
+for (var i = 0; i < platformrect.length; i++) {
+  if (platformrect[i].x < this.pos.x + this.pwidth &&
+    platformrect[i].x + platformrect[i].width > this.pos.x &&
+    platformrect[i].y < this.pos.y + this.pheight &&
+    platformrect[i].height + platformrect[i].y > this.pos.y) {
+      this.canmove=false
     }
-    if (this.isjumping = true && keyIsDown(87) && this.direction == 1) {
-      this.runidx = 9;
-    }
-    this.attackpos.x = this.pos.x + 15.5;
-    this.attackpos.y = this.pos.y + 20;
-    this.pos.y += this.velocity + this.gravity;
-    if (this.pos.y >= this.ground) {
-      this.gravity = 0;
-      this.velocity = 0;
-    } else {
-      this.gravity = 1;
-    }
+// console.log(this.canmove)
+}
+
+
+
+
 
     // Left-A
-    if (keyIsDown(65) && this.pos.x >= 0) {
+    if (keyIsDown(65) && this.pos.x >= 3 && this.canmove) {
       if (!keyIsDown(87) && frameCount % this.runrate == 0) {
         this.runidx = (this.runidx + 1) % 4;
       }
@@ -111,7 +117,7 @@ class ClientPlayer {
     }
 
     // Right-D
-    else if (keyIsDown(68) && this.pos.x <= 750) {
+    else if (keyIsDown(68) && this.pos.x <= 740- this.pwidth && this.canmove) {
       if (!keyIsDown(87) && frameCount % this.runrate == 0) {
         this.runidx = 4 + (this.runidx + 1) % 4;
 
@@ -121,6 +127,9 @@ class ClientPlayer {
     }
 
     // Punching-Space bar
+    this.attackpos.x = this.pos.x + 15.5;
+    this.attackpos.y = this.pos.y + 20;
+
     if (this.punchTimer >= 3 * frameRate()) {
       this.canPunch = false;
       this.punchTimer = 0;
@@ -137,13 +146,27 @@ class ClientPlayer {
       if (!keyIsDown(32)) {
         this.runidy = 0;
         this.canPunch = true;
-        console.log(this.canPunch);
+        // console.log(this.canPunch);
       }
     }
 
     // Jump = W
-    if (keyIsDown(87) && this.pos.y >= this.ground) {
-      this.velocity = -25;
+
+    //visuals
+    if (this.isjumping = true && keyIsDown(87) && this.direction == 0) {
+      this.runidx = 8;
+    }
+    if (this.isjumping = true && keyIsDown(87) && this.direction == 1) {
+      this.runidx = 9;
+    }
+
+    //movement
+if (!this.canmove) {
+  this.velocity = -this.velocity/5;
+}
+
+    if (keyIsDown(87) && this.pos.y >= this.ground ) {
+      this.velocity = -26;
     }
 
     // Fall
@@ -154,6 +177,13 @@ class ClientPlayer {
     // Fixes Player in ground glitch
     if (this.pos.y > this.ground) {
       this.pos.y = this.ground;
+    }
+    this.pos.y += this.velocity + this.gravity;
+    if (this.pos.y >= this.ground || this.pos.y <= 276-this.pheight) {
+      this.gravity = 0;
+      this.velocity = 0;
+    } else {
+      this.gravity = 1;
     }
   }
 
