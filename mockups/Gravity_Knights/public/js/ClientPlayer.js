@@ -1,7 +1,6 @@
 /* jshint esversion: 6 */
 
 class ClientPlayer {
-
     constructor( /*img*/ ) {
         // For implementing sprites
         // this.img = img;
@@ -10,7 +9,7 @@ class ClientPlayer {
         this.idx = null;
 
         // Foot not head
-        this.pos = createVector(800 / 2, 600 - 100);
+        this.pos = createVector(800/ 2, 700 - 100);
         this.attackpos = createVector(this.pos.x, this.pos.y);
         this.attacksize = {
             w: 25,
@@ -19,7 +18,7 @@ class ClientPlayer {
         this.isjumping = false;
         this.maxSpeed = 10;
         this.gravity = 1;
-        this.ground = 600 - 100;
+        this.ground = 700 - 100;
         this.velocity = 0;
         this.direction = 0;
         this.punchTimer = 0;
@@ -116,62 +115,54 @@ class ClientPlayer {
             }
         }
 
-        // Jump = w
-        // Up
-        if (keyIsDown(87) && this.pos.y >= this.ground) {
-            this.velocity = -25;
-        }
-        // Fall
-        else {
-            this.velocity += this.gravity;
-        }
-        if (this.pos.y > this.ground) {
-            this.pos.y = this.ground;
-        }
-    }
+// Jump = w
+// Up
+if (keyIsDown(87) && this.pos.y >= this.ground) {
+    this.velocity = -25;
+}
+// Fall
+else {
+    this.velocity += this.gravity;
+}
+if (this.pos.y > this.ground) {
+    this.pos.y = this.ground;
+  }
+}
 
-    hitdetect(othersIdx, otherPlayers) {
-        for (var i = 0; i < othersIdx.length; i++) {
-            var op = otherPlayers[othersIdx[i]];
-            if (op) {
-                if (this.hitTimer >= frameRate()) {
-                    this.canHit = true;
-                    this.hitTimer = 0;
-                } else if (
-                    this.attackpos.x + this.attacksize.w*0.5 >= op.pos.x &&
-                    this.attackpos.x + this.attacksize.w*0.5 <= (op.pos.x + this.size * 0.5) &&
-                    this.attackpos.y >= op.pos.y &&
-                    this.attackpos.y <= (op.pos.y + this.size) &&
-                    keyIsDown(32) &&
-                    this.canHit
-                ) {
-                    this.hitsLanded++;
-                    this.canHit = false;
-                    console.log('player hit', this.hitsLanded);
-                    socket.emit('player hit', othersIdx[i]);
-                } else if (!this.canHit) {
-                    this.hitTimer++;
-                }
+hitdetect(othersIdx, otherPlayers) {
+    for (var i = 0; i < othersIdx.length; i++) {
+        var op = otherPlayers[othersIdx[i]];
+        if (op){
+          if (this.hitTimer >= frameRate()){
+            this.canHit = true;
+            this.hitTimer = 0;
+          }else if (op.attackpos.x >= this.pos.x && op.attackpos.x <= (this.pos.x + 50) && op.attackpos.y >= this.pos.y && op.attackpos.y <= this.pos.y + 100 && keyIsDown(32) && this.canHit){
+                this.hitsLanded++;
+                this.canHit = false;
+                console.log('player hit', this.hitsLanded);
+                socket.emit('player hit', othersIdx[i]);
+            }else if (!this.canHit){
+                this.hitTimer++;
             }
         }
     }
+}
 
 
-    emit() {
-        // Update values
-        this.emitData.pos.x = this.pos.x;
-        this.emitData.pos.y = this.pos.y;
-        this.emitData.fistPos.x = this.attackpos.x;
-        this.emitData.fistPos.y = this.attackpos.y;
-        this.emitData.hitsLanded = this.hitsLanded;
-        socket.emit('player', this.emitData);
-    }
+emit() {
+    // Update values
+    this.emitData.pos.x = this.pos.x;
+    this.emitData.pos.y = this.pos.y;
+    this.emitData.fistPos.x = this.attackpos.x;
+    this.emitData.fistPos.y = this.attackpos.y;
+    this.emitData.hitsLanded = this.hitsLanded;
+    socket.emit('player', this.emitData);
+}
 
 
-    setIdx(idx) {
-        this.idx = idx;
-        this.emitData.idx = idx;
-        console.log("My Idx is: " + me.idx);
-    }
-
+setIdx(idx) {
+    this.idx = idx;
+    this.emitData.idx = idx;
+    console.log("My Idx is: " + me.idx);
+}
 }
