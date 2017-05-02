@@ -78,15 +78,25 @@ color: white;
 p {
     /* Cant get this text size to change size at all, need bigger */
     color: white;
-    font-size: 30px line-height: 1.2em text-align: justify;
+    font-size: 20px;
+    line-height: 1.2em;
+    text-align: justify;
     text-decoration-color: white;
     text-indent: 20px;
+    padding: 10px;
 
 }
 a {
+  flex-flow: wrap;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: .3em;
+  text-align: center;
   font-family: 'Oswald', sans-serif;
   /*margin-left: 10%;*/
   font-size: 2em;
+  padding: 10px;
+  margin: 10px;
   /*margin-right: 10%;*/
 }
 
@@ -146,6 +156,11 @@ p:first-letter {
     zoom: 1.0;
 }
 
+li {
+  color: transparent;
+  /* No more stupid bullet points  */
+}
+
  ul#menu {
         margin-left: 10%;
      margin-left: 10%;
@@ -153,6 +168,7 @@ p:first-letter {
     }
     ul#menu li {
         display:inline;
+
     }
     ul#menu li a{
         background-color: rgba(140, 143, 0, 0.6);
@@ -164,6 +180,10 @@ p:first-letter {
 
 ul#menu li a:hover {
     color: rgb(0, 171, 201);
+}
+
+@media only screen and (max-width:320px){
+  body{font-size: 12px;}
 }
 
 
@@ -206,4 +226,8 @@ a.read-more { background-color: #605833; border-radius: 5px 5px 5px 5px; color: 
 
 
 a.read-more:hover { background-color: #92864d; border-radius: 5px 5px 5px 5px; text-decoration: none; }*/
+<<<<<<< HEAD
 
+=======
+=======
+>>>>>>> a213f5c5412c299bbad9b224977f1a137dddc901
