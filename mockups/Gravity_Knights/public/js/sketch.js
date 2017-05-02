@@ -1,6 +1,7 @@
 // declaration of variables
 var bg;
 var me;
+var myIdx;
 var othersIdx = [];
 var otherPlayers = {};
 var playervis;
@@ -19,7 +20,7 @@ function setup() {
   createCanvas(800 , 600);
 
 
-  me = new ClientPlayer(playervis);
+  me = new ClientPlayer(playervis, myIdx);
   console.log(me);
 }
 
@@ -61,7 +62,12 @@ function draw() {
 
 /*************** socket data ***************/
 socket.on("player_num", function(data) {
+  console.log(data);
+  console.log(me);
+  myIdx = data;
+  if (me){
   me.setIdx(data);
+}
 });
 
 socket.on("initialize_others", function(data) {
@@ -80,9 +86,9 @@ socket.on("newplayer", function(data) {
   var newIdx = data.thereidx;
   othersIdx = data.players;
   console.log(data);
-  console.log(me.idx);
+  // console.log(me.idx);
 
-  if (me.idx !== newIdx) {
+  if (myIdx !== newIdx) {
     newIdx = newIdx.toString();
     otherPlayers[newIdx] = new OtherPlayer();
     console.log("New Player: " + newIdx);
@@ -109,6 +115,8 @@ socket.on("player_data", function(player_data) {
         playerCurr.pos.y = playerServer.pos.y;
         playerCurr.attackpos.y = playerServer.fistPos.y;
         playerCurr.attackpos.x = playerServer.fistPos.x;
+        playerCurr.runidx = playerServer.runidx;
+        playerCurr.runidy = playerServer.runidy;
       }
     }
   }

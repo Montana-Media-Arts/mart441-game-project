@@ -18,7 +18,7 @@ app.use(express.static("./public"));
 
 io.on("connection", function(socket) {
     var myIdx = num_of_players;
-	var myIdxStr = myIdx.toString();
+	  var myIdxStr = myIdx.toString();
     num_of_players++;
 
 

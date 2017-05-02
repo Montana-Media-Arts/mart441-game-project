@@ -2,7 +2,7 @@
 
 class ClientPlayer {
 
-  constructor(playervis) {
+  constructor(playervis, myIdx) {
     // Player skin
     this.runidx = 5;
     this.runidy = 0;
@@ -12,7 +12,7 @@ class ClientPlayer {
 
 
     // Unique player ID
-    this.idx = null;
+    this.idx = myIdx;
 
     // Foot not head
     this.pos = createVector(800 / 2, 600 - 100);
@@ -86,6 +86,7 @@ class ClientPlayer {
 
 
   move() {
+
 //if right arrow kes is pressed change player width for gravity and rotation of player
 //    if (keyIsDown(37)) {
 //      this.pwidth=95;
@@ -99,6 +100,7 @@ for (var i = 0; i < platformrect.length; i++) {
     platformrect[i].y < this.pos.y + this.pheight &&
     platformrect[i].height + platformrect[i].y > this.pos.y) {
       this.canmove=false
+
     }
 // console.log(this.canmove)
 }
@@ -219,6 +221,9 @@ if (!this.canmove) {
     // Update values
     this.emitData.pos.x = this.pos.x;
     this.emitData.pos.y = this.pos.y;
+
+    this.emitData.runidx = this.runidx;
+    this.emitData.runidy = this.runidy;
     this.emitData.fistPos.x = this.attackpos.x;
     this.emitData.fistPos.y = this.attackpos.y;
     this.emitData.hitsLanded = this.hitsLanded;

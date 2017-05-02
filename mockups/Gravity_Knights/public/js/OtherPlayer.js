@@ -3,23 +3,31 @@
 class OtherPlayer {
   constructor() {
       // Foot not head
+      this.runidx = 5;
+      this.runidy = 0;
+      this.runipos = [95, 190, 285, 380, 475, 570, 665, 760, /*jumps*/ 855, 0];
+      this.runrate = 5;
+      this.playervis = oppvis;
+
+
       this.pos = createVector(800 / 2, 600 - 100);
       this.attackpos = createVector(this.pos.x, this.pos.y);
       this.attacksize = {
         w: 25,
         h: 25
       };
-      this.isjumping = false;
+
       this.maxSpeed = 10;
       this.gravity = 1;
       this.ground = 600 - 100;
       this.velocity = 0;
 
+
       // size should be 0-100
       this.size = 100;
 
       // colors for Players
-      this.color = ['red', 'goldenrod', 'green', 'salmon', 'blue']
+    //  this.color = ['red', 'goldenrod', 'green', 'salmon', 'blue']
 
       this.emitData = {
         idx: this.idx,
@@ -38,6 +46,8 @@ class OtherPlayer {
         size: this.size
       };
     }
+// Movement translator?
+
 
     frame() {
       this.display();
@@ -48,15 +58,15 @@ class OtherPlayer {
       push();
       // Position the this
       translate(this.pos.x, this.pos.y);
-      fill(this.color[4]);
-      rect(0, 0, this.size / 2, this.size);
+      image(this.playervis, 0, 0, 95, 73, this.runipos[this.runidx], this.runidy, 95, 73);
+      // rect(0, 0, this.size / 2, this.size);
       pop();
 
-      push();
-      translate(this.attackpos.x, this.attackpos.y);
-      fill(this.color[4]);
-      rect(0, 0, this.attacksize.w, this.attacksize.h);
-      pop();
+      // push();
+      // translate(this.attackpos.x, this.attackpos.y);
+      // image(this.playervis, 0, 0, 95, 73, this.runipos[this.runidx], this.runidy, 95, 73);
+      // //rect(0, 0, this.attacksize.w, this.attacksize.h);
+      // pop();
 
     }
 
