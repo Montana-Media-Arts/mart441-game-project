@@ -2,7 +2,7 @@
 
 class ClientPlayer {
 
-  constructor(playervis) {
+  constructor(playervis, myIdx) {
     // Player skin
     this.runidx = 5;
     this.runidy = 0;
@@ -12,7 +12,7 @@ class ClientPlayer {
 
 
     // Unique player ID
-    this.idx = null;
+    this.idx = myIdx;
 
     // Foot not head
     this.pos = createVector(800 / 2, 600 - 100);
@@ -85,10 +85,10 @@ class ClientPlayer {
 
   move() {
     // Up - W
-    if (this.isjumping = true && keyIsDown(87) && this.direction == 0) {
+    if (this.isjumping == true && keyIsDown(87) && this.direction == 0) {
       this.runidx = 8;
     }
-    if (this.isjumping = true && keyIsDown(87) && this.direction == 1) {
+    else if (this.isjumping == true && keyIsDown(87) && this.direction == 1) {
       this.runidx = 9;
     }
     this.attackpos.x = this.pos.x + 15.5;
@@ -137,7 +137,7 @@ class ClientPlayer {
       if (!keyIsDown(32)) {
         this.runidy = 0;
         this.canPunch = true;
-        console.log(this.canPunch);
+        // console.log(this.canPunch);
       }
     }
 
@@ -189,6 +189,10 @@ class ClientPlayer {
     // Update values
     this.emitData.pos.x = this.pos.x;
     this.emitData.pos.y = this.pos.y;
+    this.emitData.isjumping = this.isjumping;
+    this.emitData.direction = this.direction;
+    this.emitData.runidx = this.runidx;
+    this.emitData.runidy = this.runidy;
     this.emitData.fistPos.x = this.attackpos.x;
     this.emitData.fistPos.y = this.attackpos.y;
     this.emitData.hitsLanded = this.hitsLanded;
