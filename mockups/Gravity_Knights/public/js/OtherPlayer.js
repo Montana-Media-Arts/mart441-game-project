@@ -16,12 +16,12 @@ class OtherPlayer {
         w: 25,
         h: 25
       };
-      this.isjumping = false;
+
       this.maxSpeed = 10;
       this.gravity = 1;
       this.ground = 600 - 100;
       this.velocity = 0;
-      this.direction = 0;
+
 
       // size should be 0-100
       this.size = 100;

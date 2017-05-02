@@ -97,8 +97,6 @@ socket.on("player_data", function(player_data) {
         playerCurr.attackpos.x = playerServer.fistPos.x;
         playerCurr.runidx = playerServer.runidx;
         playerCurr.runidy = playerServer.runidy;
-        playerCurr.isjumping = playerServer.isjumping;
-        playerCurr.direction = playerServer.direction;
       }
     }
   }

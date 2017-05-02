@@ -189,8 +189,7 @@ class ClientPlayer {
     // Update values
     this.emitData.pos.x = this.pos.x;
     this.emitData.pos.y = this.pos.y;
-    this.emitData.isjumping = this.isjumping;
-    this.emitData.direction = this.direction;
+
     this.emitData.runidx = this.runidx;
     this.emitData.runidy = this.runidy;
     this.emitData.fistPos.x = this.attackpos.x;
