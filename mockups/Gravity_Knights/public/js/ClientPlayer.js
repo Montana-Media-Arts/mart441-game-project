@@ -34,7 +34,10 @@ class ClientPlayer {
         this.pwidth = 36;
         this.pheight = 73;
         this.canMove = true;
+        this.cantMove = false;
+        this.groundSet = false;
         this.ground = 575 - this.pheight;
+        this.absoluteGround = this.ground;
 
         // size should be 0-100
         this.size = 95;
@@ -100,14 +103,47 @@ class ClientPlayer {
         //}
 
         //platforms
-        this.canMove = true;
+        this.canMove = true
+        this.cantMove = false;
+        this.groundSet = false;
         for (var i = 0; i < platformrect.length; i++) {
-            if (platformrect[i].x < this.pos.x + this.pwidth &&
+            if (
+                platformrect[i].x < this.pos.x + this.pwidth &&
                 platformrect[i].x + platformrect[i].width > this.pos.x &&
-                platformrect[i].y < this.pos.y + this.pheight &&
-                platformrect[i].height + platformrect[i].y > this.pos.y) {
-                this.canMove = false
+                platformrect[i].y < this.pos.y + this.pheight - 0 &&
+                platformrect[i].height + platformrect[i].y > this.pos.y
+            ) {
+                this.canMove = false;
 
+                // Determine which way the Knight cannot move
+                if(
+                    platformrect[i].x < this.pos.x + this.pwidth &&
+                    platformrect[i].x < this.pos.x + 10
+                ) {
+                    this.cantMove = `left`;
+                    // console.log("cannot move: " + this.cantMove);
+                } else if (
+                    platformrect[i].x + platformrect[i].width > this.pos.x &&
+                    platformrect[i].x + platformrect[i].width > this.pos.x + 10
+                ) {
+                    this.cantMove = 'right';
+                    // console.log("cannot move: " + this.cantMove);
+                }
+
+                if (
+                    platformrect[i].x < this.pos.x + this.pwidth &&
+                    platformrect[i].x + platformrect[i].width > this.pos.x &&
+                    this.pos.y + this.pheight < platformrect[i].y + 30 &&
+                    this.pos.y + this.pheight > platformrect[i].y - 30
+                ) {
+                    this.ground = platformrect[i].y - this.pheight + 0;
+                    this.groundSet = true;
+                    this.canMove = true;
+                    this.cantMove = false;
+                    console.log("On top of platform: " + i);
+                }
+            } else if (!this.groundSet) {
+                this.ground = this.absoluteGround;
             }
             // console.log(this.canMove)
         }
@@ -116,7 +152,7 @@ class ClientPlayer {
 
 
         // Left-A
-        if (keyIsDown(65) && this.pos.x >= 3 && this.canMove) {
+        if (keyIsDown(65) && this.pos.x >= 3 && this.cantMove !== 'left') {
             if (!keyIsDown(87) && frameCount % this.runrate == 0) {
                 this.runidx = (this.runidx + 1) % 4;
             }
@@ -125,7 +161,7 @@ class ClientPlayer {
         }
 
         // Right-D
-        else if (keyIsDown(68) && this.pos.x <= 740 - this.pwidth && this.canMove) {
+        else if (keyIsDown(68) && this.pos.x <= 740 - this.pwidth && this.cantMove !== 'right') {
             if (!keyIsDown(87) && frameCount % this.runrate == 0) {
                 this.runidx = 4 + (this.runidx + 1) % 4;
 
@@ -141,6 +177,7 @@ class ClientPlayer {
         if (this.punchTimer >= 3 * frameRate()) {
             this.canPunch = false;
             this.punchTimer = 0;
+            this.runidy = 0;
         } else if (keyIsDown(32) && this.direction == 1 && this.canPunch) {
             this.attackpos.x = this.pos.x - 35.5;
             this.punchTimer++;
@@ -175,24 +212,27 @@ class ClientPlayer {
 
         if (keyIsDown(87) && this.pos.y >= this.ground) {
             this.velocity = -26;
-        }
-
-        // Fall
-        else {
+        } else {
+            // Fall
             this.velocity += this.gravity;
         }
 
         // Fixes Player in ground glitch
         if (this.pos.y > this.ground) {
-            this.pos.y = this.ground;
+            this.pos.y = this.ground + 1;
         }
+
+        // update vertical position of the Knight
         this.pos.y += this.velocity + this.gravity;
-        if (this.pos.y >= this.ground || this.pos.y <= 276 - this.pheight) {
+
+        // Keep the knight from sinking through the floor
+        if (this.pos.y >= this.ground ) {
             this.gravity = 0;
             this.velocity = 0;
         } else {
             this.gravity = 1;
         }
+
     }
 
 
