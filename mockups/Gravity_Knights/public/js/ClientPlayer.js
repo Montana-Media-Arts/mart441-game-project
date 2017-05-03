@@ -26,6 +26,7 @@ class ClientPlayer {
         this.gravity = 1;
         this.velocity = 0;
         this.direction = 0;
+        this.playerScore = 0;
         this.punchTimer = 0;
         this.canPunch = true;
         this.canPunch = true;
@@ -66,15 +67,22 @@ class ClientPlayer {
         this.display();
         this.emit();
         this.hitdetect(othersIdx, otherPlayers);
+        this.score(othersIdx, otherPlayers);
     }
 
     display() {
         // Draw the this
         push();
+
         // Position the this
         translate(this.pos.x, this.pos.y);
+
         // image(this.playervis, this.runipos[this.runidx], this.runidy, 95, 73, 0, 0, 95, 73);
         image(this.playervis, 0, 0, 95, 73, this.runipos[this.runidx], this.runidy, 95, 73);
+
+        // For Player Health- purely graphical right now
+        healthHolder = text(healthString, 20, -20, 100, 100);
+
         pop();
     }
 
@@ -84,10 +92,9 @@ class ClientPlayer {
 
 
 
-
     move() {
 
-        //if right arrow kes is pressed change player width for gravity and rotation of player
+        //if right arrow key is pressed change player width for gravity and rotation of player
         //    if (keyIsDown(37)) {
         //      this.pwidth=95;
         //}
@@ -216,6 +223,24 @@ class ClientPlayer {
 
 
 
+    // Score Stuff- handles player score
+    score() {
+      if(this.playerScore == 0) {
+        this.playerScore = this.hitsLanded;
+      } else {
+        this.playerScore = this.hitsLanded;
+      }
+
+      // For Player score
+      fill(255);
+      textSize(15);
+      scoreHolder = text(scoreString, 30, 30, 100, 100) + text(this.playerScore, 90, 30, 100, 100);
+
+      // console.log(this.playerScore);
+    }
+
+
+
     emit() {
         // Update values
         this.emitData.pos.x = this.pos.x;
@@ -226,6 +251,7 @@ class ClientPlayer {
         this.emitData.fistPos.x = this.attackpos.x;
         this.emitData.fistPos.y = this.attackpos.y;
         this.emitData.hitsLanded = this.hitsLanded;
+        this.emitData.playerScore = this.playerScore;
         socket.emit('player', this.emitData);
     }
 

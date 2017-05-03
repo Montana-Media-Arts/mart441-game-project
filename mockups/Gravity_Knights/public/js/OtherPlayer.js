@@ -26,9 +26,6 @@ class OtherPlayer {
         // size should be 0-100
         this.size = 100;
 
-        // colors for Players
-        //  this.color = ['red', 'goldenrod', 'green', 'salmon', 'blue']
-
         this.emitData = {
             idx: this.idx,
             pos: {
@@ -56,10 +53,14 @@ class OtherPlayer {
     display() {
         // Draw the this
         push();
+
         // Position the this
         translate(this.pos.x, this.pos.y);
         image(this.playervis, 0, 0, 95, 73, this.runipos[this.runidx], this.runidy, 95, 73);
-        // rect(0, 0, this.size / 2, this.size);
+
+        // For Other Player Health- purely graphical right now
+        healthHolder = text(healthString, 20, -20, 100, 100);
+
         pop();
 
     }

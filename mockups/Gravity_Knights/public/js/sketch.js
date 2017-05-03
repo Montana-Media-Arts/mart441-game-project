@@ -4,8 +4,18 @@ var me;
 var myIdx;
 var othersIdx = [];
 var otherPlayers = {};
-var playerColor = ["../vis/yellowknight.gif", "../vis/redknight.gif", "../vis/purpleknight.gif", "../vis/pinkknight.gif", "../vis/orangeknight.gif", "../vis/greenknight.gif", "../vis/blueknight.gif"];
+
+// Player Vis stuff
+var playervis;
 var oppvis;
+var playerColor = ["../vis/yellowknight.gif", "../vis/redknight.gif", "../vis/purpleknight.gif", "../vis/pinkknight.gif", "../vis/orangeknight.gif", "../vis/greenknight.gif", "../vis/blueknight.gif"];
+
+// Score Health Stuff 
+var scoreString = "SCORE: ";
+var scoreHolder;
+var healthString = "HEALTH";
+var healthHolder;
+
 var platformrect = [{
     x: 315,
     y: 187,
@@ -26,14 +36,13 @@ var platformrect = [{
 // Loads Visuals
 function preload() {
     level = loadImage("../vis/map2.jpg");
-     playervis = loadImage(random(playerColor));
-     oppvis = loadImage(random(playerColor));
+    playervis = loadImage(random(playerColor));
+    oppvis = loadImage(random(playerColor));
 }
 
 
 function setup() {
     createCanvas(800, 600);
-
 
     me = new ClientPlayer(playervis, myIdx);
     console.log(me);
@@ -41,6 +50,9 @@ function setup() {
 
 function draw() {
     image(level, 0, 0);
+
+    // // For Player score
+    // scoreHolder = text(scoreString, 0, 0, 100, 100) + text(playerScore, 50, 0, 100, 100);
 
     // Refs for plat boxes
     // mid boxes
