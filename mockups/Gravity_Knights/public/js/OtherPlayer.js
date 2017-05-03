@@ -59,7 +59,12 @@ class OtherPlayer {
         image(this.playervis, 0, 0, 95, 73, this.runipos[this.runidx], this.runidy, 95, 73);
 
         // For Other Player Health- purely graphical right now
-        healthHolder = text(healthString, 20, -20, 100, 100);
+      //  healthHolder = text(healthString, 20, -20, 100, 100);
+      fill('red')
+      healthHolder=rect(15,-13,this.healthLeft,9)
+      if (ophealthLeft<=0) {
+        ophealthLeft=0
+      }
 
         pop();
 

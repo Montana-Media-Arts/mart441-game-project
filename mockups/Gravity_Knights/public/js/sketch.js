@@ -10,11 +10,13 @@ var playervis;
 var oppvis;
 var playerColor = ["../vis/yellowknight.gif", "../vis/redknight.gif", "../vis/purpleknight.gif", "../vis/pinkknight.gif", "../vis/orangeknight.gif", "../vis/greenknight.gif", "../vis/blueknight.gif"];
 
-// Score Health Stuff 
+// Score Health Stuff
 var scoreString = "SCORE: ";
 var scoreHolder;
 var healthString = "HEALTH";
 var healthHolder;
+var healthLeft=66
+var ophealthLeft=66
 
 var platformrect = [{
     x: 315,
@@ -56,14 +58,14 @@ function draw() {
 
     // Refs for plat boxes
     // mid boxes
-    rect(350, 408, 100, 2)
-    rect(350, 187, 100, 2)
+  //  rect(350, 408, 100, 2)
+  //  rect(350, 187, 100, 2)
     // left plat
-    rect(25, 274, 151, 2)
-    rect(25, 325, 151, 2)
+  //  rect(25, 274, 151, 2)
+  //  rect(25, 325, 151, 2)
     // right plat
-    rect(624, 274, 151, 2)
-    rect(624, 325, 151, 2)
+//    rect(624, 274, 151, 2)
+  //  rect(624, 325, 151, 2)
 
     // call the player object methods
     me.frame(othersIdx, otherPlayers);
@@ -131,6 +133,7 @@ socket.on("player_data", function(player_data) {
                 playerCurr.size = playerServer.size;
                 playerCurr.pos.x = playerServer.pos.x;
                 playerCurr.pos.y = playerServer.pos.y;
+                playerCurr.healthLeft = playerServer.healthLeft;
                 playerCurr.attackpos.y = playerServer.fistPos.y;
                 playerCurr.attackpos.x = playerServer.fistPos.x;
                 playerCurr.runidx = playerServer.runidx;
@@ -143,7 +146,11 @@ socket.on("player_data", function(player_data) {
 
 socket.on('hit player', function(data) {
     me.pos.y = 0;
+    //  healthHolder = text(healthString, 20, -20, 100, 100);
+healthLeft-= 22;
     console.log(data);
+    console.log(healthLeft);
+
 });
 
 socket.on("disconnect_player", function(disconnect_id) {
