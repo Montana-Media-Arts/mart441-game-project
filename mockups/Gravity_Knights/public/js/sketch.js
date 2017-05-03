@@ -4,6 +4,8 @@ var me;
 var myIdx;
 var othersIdx = [];
 var otherPlayers = {};
+var playerColor = ["../vis/yellowknight.gif", "../vis/redknight.gif", "../vis/purpleknight.gif", "../vis/pinkknight.gif", "../vis/orangeknight.gif", "../vis/greenknight.gif", "../vis/blueknight.gif"];
+var oppColor = ["../vis/yellowknight.gif", "../vis/redknight.gif", "../vis/purpleknight.gif", "../vis/pinkknight.gif", "../vis/orangeknight.gif", "../vis/greenknight.gif", "../vis/blueknight.gif"];
 var playervis;
 var oppvis;
 var platformrect = [{
@@ -26,8 +28,8 @@ var platformrect = [{
 // Loads Visuals
 function preload() {
     level = loadImage("../vis/map2.jpg");
-    playervis = loadImage("../vis/yellowknight.gif");
-    oppvis = loadImage("../vis/redknight.gif");
+     playervis = loadImage(random(playerColor));
+     oppvis = loadImage(random(oppColor));
 }
 
 
