@@ -88,11 +88,11 @@ class ClientPlayer {
         // For Player Health
         // Health Lost- must be positioned here.
         fill('red');
-        healthHolder2 = rect(15, -13, 66, 9, 20);
+        healthHolder2 = rect(15, -13, 66, 9);
 
         // Remaining Health
         fill('lime');
-        healthHolder = rect(15, -13, healthLeft, 9, 20);
+        healthHolder = rect(15, -13, healthLeft, 9);
 
         if (healthLeft <= 0) {
             healthLeft = 0;
