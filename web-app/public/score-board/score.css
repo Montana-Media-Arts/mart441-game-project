@@ -1,0 +1,45 @@
+body {
+  background-image: url('score/bricktexture.jpg');
+}
+table {
+  font-family: 'John Handy Let', "impact", sans-serif;
+  background-color: darkgray;
+  color: white;
+  margin-left: auto;
+  margin-right: auto;
+}
+th {
+  font-family: 'Impact', 'Arial', sans-serif;
+  background-color: black;
+}
+tr {
+  border: 3px solid gray;
+}
+
+h1 {
+  text-align: center;
+  color: blue;
+  font-family: 'Impact', 'Arial', sans-serif;
+}
+td {
+  background-color: rgb(50,50,50);
+}
+.UserName {
+  color:white;
+  font: 1.3em 'Charcoal', 'Arial', sans-serif;
+
+}
+
+.Score {
+  color: limegreen;
+  font: 1em 'Charcoal', 'Arial', sans-serif;
+  text-align: right;
+  margin: 10%;
+}
+
+.Date {
+  color: magenta;
+  font: .8em 'Charcoal', 'Arial', sans-serif;
+  text-align: right;
+  margin: 0 0 0 10%;
+}
