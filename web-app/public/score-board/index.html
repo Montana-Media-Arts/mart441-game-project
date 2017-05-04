@@ -1,0 +1,48 @@
+<html lang = "en">
+<head>
+<meta charset = "utf-8" name = "viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="score.css">
+<title> Scoreboard </title>
+
+
+
+</head>
+
+<body>
+  <h1> Scoreboard </h1>
+
+  <table style="width:90%">
+    <tr>
+      <th> User Name </th>
+      <th> Score </th>
+      <th> Time Stamp </th>
+    </tr>
+    <tr>
+      <td class = "UserName" id = "name"></td>
+      <td class = "Score" id = "score"></td>
+      <td class = "Date" id = "date"></td>
+    </tr>
+  </table>
+
+  <script type= "text/javascript">
+
+    function addScore(){
+      var name, score, date, pos, arr;
+
+      arr = document.getElementsByTagName("table");
+
+      name = document.getElementById("name");
+      score = document.getElementById("score");
+      date = document.getElementById("date");
+
+      name.innerHTML = "Hola";
+      score.innerHTML = "123242";
+      date.innerHTML = new Date().toDateString();
+      arr.innerHTML = "<tr> \n" +
+      "<td class = 'UserName'>" + name + "</td> \n <td class = 'Score'>" +
+      score + "</td> \n <td class = 'Date'>" + date + "</td> \n </tr>";
+
+    }
+    addScore();
+  </script>
+</body>
