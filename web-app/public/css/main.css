@@ -15,7 +15,7 @@ body {
     opacity: 0.9;
     padding: 10px;
     background-color: rgb(193, 237, 186);
-    background-image: url(images/background.jpg);
+    background-image: url(../images/background.jpg);
     background-size: cover;
 }
 
@@ -48,7 +48,7 @@ img {
 
 
 h1 {
-    background-image: url(images/StartScsdagdfgreen.png);
+    background-image: url(../images/StartScsdagdfgreen.png);
     background-size: cover
     font-family: 'Oswald', sans-serif;
     /*font-size: 300%;
