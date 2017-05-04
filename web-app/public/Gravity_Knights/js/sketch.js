@@ -10,7 +10,7 @@ var playervis;
 var oppvis;
 
 // Array for vis
-var playerColor = ["../vis/yellowknight.gif", "../vis/redknight.gif", "../vis/purpleknight.gif", "../vis/pinkknight.gif", "../vis/orangeknight.gif", "../vis/greenknight.gif", "../vis/blueknight.gif"];
+var playerColor = ["vis/yellowknight.gif", "vis/redknight.gif", "vis/purpleknight.gif", "vis/pinkknight.gif", "vis/orangeknight.gif", "vis/greenknight.gif", "vis/blueknight.gif"];
 
 // Score Health Stuff
 var scoreString = "SCORE: ";
@@ -39,7 +39,7 @@ var platformrect = [{
 
 // Loads Visuals
 function preload() {
-    level = loadImage("../vis/map2.jpg");
+    level = loadImage("vis/map2.jpg");
 
     // Handles random color
     playervis = loadImage(random(playerColor));
