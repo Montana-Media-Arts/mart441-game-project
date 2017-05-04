@@ -142,6 +142,7 @@ p:first-letter {
 }
 
 #header, #body, #footer {
+    background-color: rgba(0, 1, 70, 0.4);
     margin-left: 10%;
     margin-right: 10%;
     outline: 5px gold groove;
@@ -226,8 +227,4 @@ a.read-more { background-color: #605833; border-radius: 5px 5px 5px 5px; color: 
 
 
 a.read-more:hover { background-color: #92864d; border-radius: 5px 5px 5px 5px; text-decoration: none; }*/
-<<<<<<< HEAD
-
-=======
-=======
->>>>>>> a213f5c5412c299bbad9b224977f1a137dddc901
+x
