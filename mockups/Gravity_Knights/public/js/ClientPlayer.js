@@ -29,7 +29,6 @@ class ClientPlayer {
         this.playerScore = 0;
         this.punchTimer = 0;
         this.canPunch = true;
-        this.canPunch = true;
         this.hitTimer = 0;
         this.pwidth = 36;
         this.pheight = 73;
@@ -39,7 +38,7 @@ class ClientPlayer {
         this.ground = 575 - this.pheight;
         this.absoluteGround = this.ground;
 
-        // size should be 0-100
+        // Size should be 0-100
         this.size = 95;
 
 
@@ -75,6 +74,8 @@ class ClientPlayer {
         this.score(othersIdx, otherPlayers);
     }
 
+
+
     display() {
         // Draw the this
         push();
@@ -82,7 +83,7 @@ class ClientPlayer {
         // Position the this
         translate(this.pos.x, this.pos.y);
 
-        // image(this.playervis, this.runipos[this.runidx], this.runidy, 95, 73, 0, 0, 95, 73);
+        // Player Sprites
         image(this.playervis, 0, 0, 95, 73, this.runipos[this.runidx], this.runidy, 95, 73);
 
         // For Player Health
@@ -94,14 +95,27 @@ class ClientPlayer {
         fill('lime');
         healthHolder = rect(15, -13, healthLeft, 9);
 
+        // Handles remaining Health/Player Death
         if (healthLeft <= 0) {
             healthLeft = 0;
+
+            // find a better way to kill the player
+            fill('white');
+            textSize(15);
+            text("YOU DIED", 15, -40, 100, 100);
+
+            // Score alert- to send initials to text document later
+              // needs work
+            // prompt("YOU DIED! YOUR SCORE WAS- " + this.playerScore + " REFRESH TO TRY AGAIN", "Submit Score? Initials Here!");
+
+            // Can no longer inflict damage- prevents ghost damage
+            this.canPunch = false;
           }
-
-
         pop();
     }
 
+
+    // For frames
     runtimer() {
         /*empty for now*/
     }
@@ -114,7 +128,7 @@ class ClientPlayer {
         //      this.pwidth=95;
         //}
 
-        //platforms
+        // platforms
         this.canMove = true
         this.cantMove = false;
         this.groundSet = false;
@@ -209,7 +223,7 @@ class ClientPlayer {
 
         // Jump = W
 
-        //visuals
+        // visuals
         if (this.isjumping = true && keyIsDown(87) && this.direction == 0) {
             this.runidx = 8;
         }
@@ -217,7 +231,7 @@ class ClientPlayer {
             this.runidx = 9;
         }
 
-        //movement
+        // movement
         if (!this.canMove) {
             this.velocity = -this.velocity / 5;
         }
@@ -229,7 +243,6 @@ class ClientPlayer {
             this.velocity += this.gravity;
         }
 
-        // Fixes Player in ground glitch
         if (this.pos.y > this.ground) {
             this.pos.y = this.ground + 1;
         }
@@ -237,7 +250,7 @@ class ClientPlayer {
         // Updates vertical position of the Knight
         this.pos.y += this.velocity + this.gravity;
 
-        // Keep the knight from sinking through the floor
+        // Fixes Player in ground glitch
         if (this.pos.y >= this.ground) {
             this.gravity = 0;
             this.velocity = 0;

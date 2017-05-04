@@ -8,6 +8,8 @@ var otherPlayers = {};
 // Player Vis stuff
 var playervis;
 var oppvis;
+
+// Array for vis
 var playerColor = ["../vis/yellowknight.gif", "../vis/redknight.gif", "../vis/purpleknight.gif", "../vis/pinkknight.gif", "../vis/orangeknight.gif", "../vis/greenknight.gif", "../vis/blueknight.gif"];
 
 // Score Health Stuff
@@ -38,9 +40,12 @@ var platformrect = [{
 // Loads Visuals
 function preload() {
     level = loadImage("../vis/map2.jpg");
+
+    // Handles random color
     playervis = loadImage(random(playerColor));
     oppvis = loadImage(random(playerColor));
 }
+
 
 
 function setup() {
@@ -50,11 +55,10 @@ function setup() {
     console.log(me);
 }
 
+
+
 function draw() {
     image(level, 0, 0);
-
-    // // For Player score
-    // scoreHolder = text(scoreString, 0, 0, 100, 100) + text(playerScore, 50, 0, 100, 100);
 
     // Refs for plat boxes
     // mid boxes
@@ -146,8 +150,7 @@ socket.on("player_data", function(player_data) {
 
 socket.on('hit player', function(data) {
     me.pos.y = 0;
-    //  healthHolder = text(healthString, 20, -20, 100, 100);
-healthLeft-= 22;
+    healthLeft-= 22;
     console.log(data);
     console.log(healthLeft);
 

@@ -67,7 +67,6 @@ class OtherPlayer {
           healthHolder = rect(15, -13, this.healthLeft, 9);
           if (ophealthLeft <= 0) {
             ophealthLeft = 0;
-            !display();
           }
 
         pop();
