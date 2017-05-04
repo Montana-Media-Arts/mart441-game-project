@@ -60,10 +60,10 @@ class OtherPlayer {
 
         // For Other Player Health- purely graphical right now
           // Health Lost- must be positioned here.
-          fill('red');
+          fill('black');
           healthHolder2 = rect(15, -13, 66, 9);
 
-          fill('lime');
+          fill('red');
           healthHolder = rect(15, -13, this.healthLeft, 9);
           if (ophealthLeft <= 0) {
             ophealthLeft = 0;
