@@ -13,10 +13,10 @@ var playerColor = ["../vis/yellowknight.gif", "../vis/redknight.gif", "../vis/pu
 // Score Health Stuff
 var scoreString = "SCORE: ";
 var scoreHolder;
-var healthString = "HEALTH";
 var healthHolder;
-var healthLeft=66
-var ophealthLeft=66
+var healthHolder2;
+var healthLeft = 66;
+var ophealthLeft = 66;
 
 var platformrect = [{
     x: 315,
