@@ -7,7 +7,7 @@ class ClientPlayer {
 //w=87 a=65 s=83 d=68
 this.leftKey=65
 this.rightKey=68
-this.topKey=87
+this.jumpKey=87
 this.botKey=83
 
 //gravity
@@ -166,7 +166,7 @@ this.botGrav=true
         // Left-A
         if (keyIsDown(this.leftKey)) {
             this.aPressed = true;
-            if (!keyIsDown(this.topKey) && frameCount % this.runrate == 0)
+            if (!keyIsDown(this.jumpKey) && frameCount % this.runrate == 0)
                 this.runidx = (this.runidx + 1) % 4;
             if (this.gravity.x == -1)
                 this.velocity.y = -5;
@@ -188,7 +188,7 @@ this.botGrav=true
         // Right-D
         else if (keyIsDown(this.rightKey)) {
             this.dPressed = true;
-            if (!keyIsDown(this.topKey) && frameCount % this.runrate == 0)
+            if (!keyIsDown(this.jumpKey) && frameCount % this.runrate == 0)
                 this.runidx = 4 + (this.runidx + 1) % 4;
             if (this.gravity.x == -1)
                 this.velocity.y = 5;
@@ -240,7 +240,7 @@ this.botGrav=true
 
 
         //Jump
-        if (keyIsDown(this.topKey) && this.grounded) {
+        if (keyIsDown(this.jumpKey) && this.grounded) {
             this.grounded = false;
             if (this.gravity.y == 1)
                 this.velocity.y = -26;
@@ -329,7 +329,7 @@ if (this.leftGrav==true) {
   this.botGrav=false
   this.leftKey=87
   this.rightKey=83
-  this.topKey=68
+  this.jumpKey=68
 }
 if (this.rightGrav==true) {
   this.leftGrav=false
@@ -337,7 +337,7 @@ if (this.rightGrav==true) {
   this.botGrav=false
   this.leftKey=83
   this.rightKey=87
-  this.topKey=65
+  this.jumpKey=65
 }
 if (  this.topGrav==true) {
   this.leftGrav=false
@@ -345,7 +345,7 @@ if (  this.topGrav==true) {
   this.botGrav=false
   this.leftKey=65
   this.rightKey=68
-  this.topKey=83
+  this.jumpKey=83
 }
 if (this.botGrav==true) {
   this.leftGrav=false
@@ -353,7 +353,7 @@ if (this.botGrav==true) {
   this.topGrav=false
   this.leftKey=65
   this.rightKey=68
-  this.topKey=87
+  this.jumpKey=87
 }
 
 
