@@ -3,6 +3,19 @@
 class ClientPlayer {
 
     constructor(playervis, myIdx) {
+//keycodes
+//w=87 a=65 s=83 d=68
+this.leftKey=65
+this.rightKey=68
+this.topKey=87
+this.botKey=83
+
+//gravity
+this.leftGrav=false
+this.rightGrav=false
+this.topGrav=false
+this.botGrav=true
+
         // Player skin
         this.runidx = 5;
         this.runidy = 0;
@@ -15,7 +28,7 @@ class ClientPlayer {
         this.idx = myIdx;
 
         // Foot not head
-        this.pos = createVector(800 / 2, 600 - 100);
+        this.pos = createVector(800 / 2, 500);
         this.attackpos = createVector(this.pos.x, this.pos.y);
         this.attacksize = {
             w: 25,
@@ -151,9 +164,9 @@ class ClientPlayer {
 
     move() {
         // Left-A
-        if (keyIsDown(65)) {
+        if (keyIsDown(this.leftKey)) {
             this.aPressed = true;
-            if (!keyIsDown(87) && frameCount % this.runrate == 0)
+            if (!keyIsDown(this.topKey) && frameCount % this.runrate == 0)
                 this.runidx = (this.runidx + 1) % 4;
             if (this.gravity.x == -1)
                 this.velocity.y = -5;
@@ -164,7 +177,7 @@ class ClientPlayer {
             else if (this.gravity.y == -1)
                 this.velocity.x = -5;
             this.direction = 1;
-        } else if (!keyIsDown(65) && this.aPressed) {
+        } else if (!keyIsDown(this.leftKey) && this.aPressed) {
             this.aPressed = false;
             if (this.gravity.x == 0)
                 this.velocity.x = 0;
@@ -173,9 +186,9 @@ class ClientPlayer {
         }
 
         // Right-D
-        else if (keyIsDown(68)) {
+        else if (keyIsDown(this.rightKey)) {
             this.dPressed = true;
-            if (!keyIsDown(87) && frameCount % this.runrate == 0)
+            if (!keyIsDown(this.topKey) && frameCount % this.runrate == 0)
                 this.runidx = 4 + (this.runidx + 1) % 4;
             if (this.gravity.x == -1)
                 this.velocity.y = 5;
@@ -186,7 +199,7 @@ class ClientPlayer {
             else if (this.gravity.y == -1)
                 this.velocity.x = 5;
             this.direction = 0;
-        } else if (!keyIsDown(68) && this.dPressed) {
+        } else if (!keyIsDown(this.rightKey) && this.dPressed) {
             this.dPressed = false;
             if (this.gravity.x == 0)
                 this.velocity.x = 0;
@@ -227,7 +240,7 @@ class ClientPlayer {
 
 
         //Jump
-        if (keyIsDown(87) && this.grounded) {
+        if (keyIsDown(this.topKey) && this.grounded) {
             this.grounded = false;
             if (this.gravity.y == 1)
                 this.velocity.y = -26;
@@ -308,28 +321,71 @@ class ClientPlayer {
         }
 
         //Gravity
+
+        //resets controls
+if (this.leftGrav==true) {
+  this.rightGrav=false
+  this.topGrav=false
+  this.botGrav=false
+  this.leftKey=87
+  this.rightKey=83
+  this.topKey=68
+}
+if (this.rightGrav==true) {
+  this.leftGrav=false
+  this.topGrav=false
+  this.botGrav=false
+  this.leftKey=83
+  this.rightKey=87
+  this.topKey=65
+}
+if (  this.topGrav==true) {
+  this.leftGrav=false
+  this.rightGrav=false
+  this.botGrav=false
+  this.leftKey=65
+  this.rightKey=68
+  this.topKey=83
+}
+if (this.botGrav==true) {
+  this.leftGrav=false
+  this.rightGrav=false
+  this.topGrav=false
+  this.leftKey=65
+  this.rightKey=68
+  this.topKey=87
+}
+
+
+
+
+        //top up
         if (keyIsDown(38) && !this.upPressed) {
+          this.topGrav=true
             this.gravity.y = -1;
             this.gravity.x = 0;
             this.upPressed = true;
         } else if (!keyIsDown(38))
             this.upPressed = false;
-
+//down
         if (keyIsDown(40) && !this.downPressed) {
+          this.botGrav=true
             this.gravity.y = 1;
             this.gravity.x = 0;
             this.downPressed = true;
         } else if (!keyIsDown(40))
             this.downPressed = false;
-
+//left
         if (keyIsDown(37) && !this.leftPressed) {
+          this.leftGrav=true
             this.gravity.x = -1;
             this.gravity.y = 0;
             this.leftPressed = true;
         } else if (!keyIsDown(38))
             this.leftPressed = false;
-
+//right
         if (keyIsDown(39) && !this.rightPressed) {
+          this.rightGrav=true
             this.gravity.x = 1;
             this.gravity.y = 0;
             this.rightPressed = true;
