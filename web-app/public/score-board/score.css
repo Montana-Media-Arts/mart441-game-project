@@ -31,6 +31,10 @@ td {
 
 }
 
+.hidden{
+  visibility: hidden;
+}
+
 .Score {
   color: limegreen;
   font: 1em 'Charcoal', 'Arial', sans-serif;

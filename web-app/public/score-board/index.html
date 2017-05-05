@@ -9,40 +9,83 @@
 </head>
 
 <body>
+
+  <div id = "Name" class = "hidden"> Alex </div>
+  <!-- <div id = "name">Tanner</div>
+  <div id = "name">Renny</div> -->
+
+  <div id = "scores" class = "hidden"> 200 </div>
+  <!-- <div id = "score">500</div>
+  <div id = "score">1000</div> -->
+
   <h1> Scoreboard </h1>
 
-  <table style="width:90%">
+  <table id = "topscores" style="width:90%">
     <tr>
       <th> User Name </th>
       <th> Score </th>
       <th> Time Stamp </th>
     </tr>
     <tr>
-      <td class = "UserName" id = "name"></td>
+      <td class = "UserName" id = "UserName"></td>
       <td class = "Score" id = "score"></td>
       <td class = "Date" id = "date"></td>
     </tr>
   </table>
 
+
   <script type= "text/javascript">
 
-    function addScore(){
-      var name, score, date, pos, arr;
 
-      arr = document.getElementsByTagName("table");
+    function firstScore(){
+      var name, score, date, pos, arr, Name;
 
-      name = document.getElementById("name");
+      arr = document.getElementById("topscores");
+
+      name = document.getElementById("UserName");
       score = document.getElementById("score");
       date = document.getElementById("date");
+      Name = document.getElementById("Name");
 
-      name.innerHTML = "Hola";
-      score.innerHTML = "123242";
+      //presentName = document.getElementById("UserName");
+
+      name.innerHTML = "Alice";
+      score.innerHTML = "789732984";
+
+      // name.innerHTML = "Hola";
+      //score.innerHTML = "123242";
       date.innerHTML = new Date().toDateString();
-      arr.innerHTML = "<tr> \n" +
-      "<td class = 'UserName'>" + name + "</td> \n <td class = 'Score'>" +
-      score + "</td> \n <td class = 'Date'>" + date + "</td> \n </tr>";
+      arr.innerHTML += "<tr> \n" +
+      "<td class = 'UserName' id = 'UserName'></td> \n <td class = 'Score' id = 'score'></td> \n <td id = 'date' class = 'Date' id = 'date'></td> \n </tr>";
 
     }
-    addScore();
+
+    function addScore(){
+      var name, score, date, pos, arr, Name;
+
+      arr = document.getElementById("topscores");
+
+      name = document.getElementById("UserName");
+      score = document.getElementById("score");
+      date = document.getElementById("date");
+      Name = document.getElementById("Name");
+
+      //presentName = document.getElementById("UserName");
+
+      name.innerHTML = "Alice";
+      score.innerHTML = "789732984";
+
+      // name.innerHTML = "Hola";
+      //score.innerHTML = "123242";
+      date.innerHTML = new Date().toDateString();
+      arr.innerHTML += "<tr> \n" +
+      "<td class = 'UserName' id = 'UserName'></td> \n <td class = 'Score' id = 'score'></td> \n <td id = 'date' class = 'Date' id = 'date'></td> \n </tr>";
+
+    }
+    for (var i = 0; i < 5; i++){
+      addScore();
+  }
+
+
   </script>
 </body>
