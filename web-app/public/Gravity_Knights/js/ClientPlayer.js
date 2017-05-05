@@ -23,8 +23,17 @@ class ClientPlayer {
         };
         this.isjumping = false;
         this.maxSpeed = 10;
-        this.gravity = 1;
-        this.velocity = 0;
+        this.gravity = {
+            x: 0,
+            y: 1,
+            magnitude: function() {
+                return sqrt(x * x + y * y)
+            }
+        };
+        this.velocity = {
+            x: 0,
+            y: 0
+        };
         this.direction = 0;
         this.playerScore = 0;
         this.punchTimer = 0;
@@ -37,6 +46,13 @@ class ClientPlayer {
         this.groundSet = false;
         this.ground = 575 - this.pheight;
         this.absoluteGround = this.ground;
+        this.aPressed = false;
+        this.dPressed = false;
+        this.upPressed = false;
+        this.downPressed = false;
+        this.leftPressed = false;
+        this.rightPressed = false;
+        this.grounded = true;
 
         // Size should be 0-100
         this.size = 95;
@@ -59,7 +75,11 @@ class ClientPlayer {
                 y: 0
             },
             size: this.size,
-            hitsLanded: 0
+            hitsLanded: 0,
+            gravity: {
+                x: 0,
+                y: 0
+            }
         };
     }
 
@@ -77,23 +97,30 @@ class ClientPlayer {
 
 
     display() {
-        // Draw the this
+        // Draw the player
         push();
+        translate(this.pos.x + this.size / 2, this.pos.y + this.size / 2);
 
-        // Position the this
-        translate(this.pos.x, this.pos.y);
-
+        if (this.gravity.y == -1)
+            rotate(PI);
+        else if (this.gravity.x == 1)
+            rotate(3 * PI / 2);
+        else if (this.gravity.x == -1)
+            rotate(PI / 2);
+        // Position the player
         // Player Sprites
-        image(this.playervis, 0, 0, 95, 73, this.runipos[this.runidx], this.runidy, 95, 73);
+        if (this.gravity.y == -1)
+            scale(-1, 1);
+        image(this.playervis, -this.size / 2, -this.size / 2, 95, 73, this.runipos[this.runidx], this.runidy, 95, 73);
 
         // For Player Health
         // Health Lost- must be positioned here.
         fill('black');
-        healthHolder2 = rect(15, -13, 66, 9);
+        healthHolder2 = rect(15 - this.size / 2, -13 - this.size / 2, 66, 9);
 
         // Remaining Health
         fill('lime');
-        healthHolder = rect(15, -13, healthLeft, 9);
+        healthHolder = rect(15 - this.size / 2, -13 - this.size / 2, healthLeft, 9);
 
         // Handles remaining Health/Player Death
         if (healthLeft <= 0) {
@@ -102,15 +129,15 @@ class ClientPlayer {
             // find a better way to kill the player
             fill('white');
             textSize(15);
-            text("YOU DIED", 15, -40, 100, 100);
+            text("YOU DIED", 15 - this.size / 2, -40 - this.size / 2, 100, 100);
 
             // Score alert- to send initials to text document later
-              // needs work
+            // needs work
             // prompt("YOU DIED! YOUR SCORE WAS- " + this.playerScore + " REFRESH TO TRY AGAIN", "Submit Score? Initials Here!");
 
             // Can no longer inflict damage- prevents ghost damage
             this.canPunch = false;
-          }
+        }
         pop();
     }
 
@@ -123,77 +150,48 @@ class ClientPlayer {
 
 
     move() {
-        //if right arrow key is pressed change player width for gravity and rotation of player
-        //    if (keyIsDown(37)) {
-        //      this.pwidth=95;
-        //}
-
-        // platforms
-        this.canMove = true
-        this.cantMove = false;
-        this.groundSet = false;
-        for (var i = 0; i < platformrect.length; i++) {
-            if (
-                platformrect[i].x < this.pos.x + this.pwidth &&
-                platformrect[i].x + platformrect[i].width > this.pos.x &&
-                platformrect[i].y < this.pos.y + this.pheight - 0 &&
-                platformrect[i].height + platformrect[i].y > this.pos.y
-            ) {
-                this.canMove = false;
-
-                // Determine which way the Knight cannot move
-                if (
-                    platformrect[i].x < this.pos.x + this.pwidth &&
-                    platformrect[i].x < this.pos.x + 10
-                ) {
-                    this.cantMove = `left`;
-                    // console.log("cannot move: " + this.cantMove);
-                } else if (
-                    platformrect[i].x + platformrect[i].width > this.pos.x &&
-                    platformrect[i].x + platformrect[i].width > this.pos.x + 10
-                ) {
-                    this.cantMove = 'right';
-                    // console.log("cannot move: " + this.cantMove);
-                }
-
-                if (
-                    platformrect[i].x < this.pos.x + this.pwidth &&
-                    platformrect[i].x + platformrect[i].width > this.pos.x &&
-                    this.pos.y + this.pheight < platformrect[i].y + 30 &&
-                    this.pos.y + this.pheight > platformrect[i].y - 30
-                ) {
-                    this.ground = platformrect[i].y - this.pheight + 0;
-                    this.groundSet = true;
-                    this.canMove = true;
-                    this.cantMove = false;
-                    console.log("On top of platform: " + i);
-                }
-            } else if (!this.groundSet) {
-                this.ground = this.absoluteGround;
-            }
-            // console.log(this.canMove)
-        }
-
-
-
-
         // Left-A
-        if (keyIsDown(65) && this.pos.x >= 3 && this.cantMove !== 'left') {
-            if (!keyIsDown(87) && frameCount % this.runrate == 0) {
+        if (keyIsDown(65)) {
+            this.aPressed = true;
+            if (!keyIsDown(87) && frameCount % this.runrate == 0)
                 this.runidx = (this.runidx + 1) % 4;
-            }
-            this.pos.x -= 5;
+            if (this.gravity.x == -1)
+                this.velocity.y = -5;
+            else if (this.gravity.x == 1)
+                this.velocity.y = 5;
+            else if (this.gravity.y == 1)
+                this.velocity.x = -5;
+            else if (this.gravity.y == -1)
+                this.velocity.x = -5;
             this.direction = 1;
+        } else if (!keyIsDown(65) && this.aPressed) {
+            this.aPressed = false;
+            if (this.gravity.x == 0)
+                this.velocity.x = 0;
+            else if (this.gravity.y == 0)
+                this.velocity.y = 0;
         }
 
         // Right-D
-        else if (keyIsDown(68) && this.pos.x <= 740 - this.pwidth && this.cantMove !== 'right') {
-            if (!keyIsDown(87) && frameCount % this.runrate == 0) {
+        else if (keyIsDown(68)) {
+            this.dPressed = true;
+            if (!keyIsDown(87) && frameCount % this.runrate == 0)
                 this.runidx = 4 + (this.runidx + 1) % 4;
-
-            }
-            this.pos.x += 5;
+            if (this.gravity.x == -1)
+                this.velocity.y = 5;
+            else if (this.gravity.x == 1)
+                this.velocity.y = -5;
+            else if (this.gravity.y == 1)
+                this.velocity.x = 5;
+            else if (this.gravity.y == -1)
+                this.velocity.x = 5;
             this.direction = 0;
+        } else if (!keyIsDown(68) && this.dPressed) {
+            this.dPressed = false;
+            if (this.gravity.x == 0)
+                this.velocity.x = 0;
+            else if (this.gravity.y == 0)
+                this.velocity.y = 0;
         }
 
         // Punching-Space bar
@@ -221,46 +219,123 @@ class ClientPlayer {
             }
         }
 
-        // Jump = W
-
         // visuals
-        if (this.isjumping = true && keyIsDown(87) && this.direction == 0) {
+        if (this.isjumping = true && keyIsDown(87) && this.direction == 0)
             this.runidx = 8;
-        }
-        if (this.isjumping = true && keyIsDown(87) && this.direction == 1) {
+        if (this.isjumping = true && keyIsDown(87) && this.direction == 1)
             this.runidx = 9;
-        }
 
-        // movement
-        if (!this.canMove) {
-            this.velocity = -this.velocity / 5;
-        }
 
-        if (keyIsDown(87) && this.pos.y >= this.ground) {
-            this.velocity = -26;
+        //Jump
+        if (keyIsDown(87) && this.grounded) {
+            this.grounded = false;
+            if (this.gravity.y == 1)
+                this.velocity.y = -26;
+            if (this.gravity.y == -1)
+                this.velocity.y = 26;
+            if (this.gravity.x == 1)
+                this.velocity.x = -26;
+            if (this.gravity.x == -1)
+                this.velocity.x = 26;
         } else {
             // Fall
-            this.velocity += this.gravity;
+            this.velocity.y += this.gravity.y;
+            this.velocity.x += this.gravity.x;
         }
 
-        if (this.pos.y > this.ground) {
-            this.pos.y = this.ground + 1;
-        }
 
-        // Updates vertical position of the Knight
-        this.pos.y += this.velocity + this.gravity;
+        //Collisions
+        var col = false;
+        for (var i = 0; i < platformrect.length; i++)
+            if (platformrect[i].x < this.pos.x + this.velocity.x + this.pwidth &&
+                platformrect[i].x + platformrect[i].width > this.pos.x + this.velocity.x &&
+                platformrect[i].y < this.pos.y + this.velocity.y + this.pheight &&
+                platformrect[i].height + platformrect[i].y > this.pos.y + this.velocity.y) {
 
-        // Fixes Player in ground glitch
+                //Horizontal collision
+                if (platformrect[i].x < this.pos.x + this.pwidth &&
+                    platformrect[i].x < this.pos.x + 10) {
+                    if (this.gravity.y == 0) {
+                        this.grounded = true;
+                        this.velocity.x = 0;
+                    } else
+                        this.velocity.y = 0;
+                    col = true;
+                }
+                //Vertical Collision
+                if (platformrect[i].x < this.pos.x + this.pwidth &&
+                    platformrect[i].x < this.pos.x + 10) {
+                    if (this.gravity.x == 0) {
+                        this.grounded = true;
+                        this.velocity.y = 0;
+                    } else
+                        this.velocity.x = 0;
+                    col = true;
+                }
+            }
+
+        // Updates position of the Knight
+        this.pos.y += this.velocity.y;
+        this.pos.x += this.velocity.x;
+
+        //Outside Collisions (edges of map)
         if (this.pos.y >= this.ground) {
-            this.gravity = 0;
-            this.velocity = 0;
-        } else {
-            this.gravity = 1;
+            this.grounded = true;
+            this.velocity.x = 0;
+            this.velocity.y = 0;
+            this.pos.y = this.ground;
         }
 
+        if (this.pos.y <= 0) {
+            this.grounded = true;
+            this.velocity.x = 0;
+            this.velocity.y = 0;
+            this.pos.y = 0;
+        }
+
+        if (this.pos.x >= width - this.size) {
+            this.grounded = true;
+            this.velocity.x = 0;
+            this.velocity.y = 0;
+            this.pos.x = width - this.size + 1;
+        }
+
+        if (this.pos.x <= 0) {
+            this.grounded = true;
+            this.velocity.x = 0;
+            this.velocity.y = 0;
+            this.pos.x = 3;
+        }
+
+        //Gravity
+        if (keyIsDown(38) && !this.upPressed) {
+            this.gravity.y = -1;
+            this.gravity.x = 0;
+            this.upPressed = true;
+        } else if (!keyIsDown(38))
+            this.upPressed = false;
+
+        if (keyIsDown(40) && !this.downPressed) {
+            this.gravity.y = 1;
+            this.gravity.x = 0;
+            this.downPressed = true;
+        } else if (!keyIsDown(40))
+            this.downPressed = false;
+
+        if (keyIsDown(37) && !this.leftPressed) {
+            this.gravity.x = -1;
+            this.gravity.y = 0;
+            this.leftPressed = true;
+        } else if (!keyIsDown(38))
+            this.leftPressed = false;
+
+        if (keyIsDown(39) && !this.rightPressed) {
+            this.gravity.x = 1;
+            this.gravity.y = 0;
+            this.rightPressed = true;
+        } else if (!keyIsDown(40))
+            this.rightPressed = false;
     }
-
-
 
     hitdetect(othersIdx, otherPlayers) {
         for (var i = 0; i < othersIdx.length; i++) {
@@ -281,7 +356,6 @@ class ClientPlayer {
                     socket.emit('player hit', othersIdx[i]);
                 } else if (!this.canPunch) {
                     this.hitTimer++;
-
                 }
             }
         }
@@ -318,6 +392,7 @@ class ClientPlayer {
         this.emitData.fistPos.y = this.attackpos.y;
         this.emitData.hitsLanded = this.hitsLanded;
         this.emitData.playerScore = this.playerScore;
+        this.emitData.gravity = this.gravity;
         socket.emit('player', this.emitData);
     }
 

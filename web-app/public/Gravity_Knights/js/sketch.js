@@ -60,23 +60,25 @@ function setup() {
 function draw() {
     image(level, 0, 0);
 
+    //for (var i = 0; i < platformrect.length; i++)
+    //	rect (platformrect[i].x, platformrect[i].y, platformrect[i].width, platformrect[i].height);
+
     // Refs for plat boxes
     // mid boxes
-  //  rect(350, 408, 100, 2)
-  //  rect(350, 187, 100, 2)
+    //  rect(350, 408, 100, 2)
+    //  rect(350, 187, 100, 2)
     // left plat
-  //  rect(25, 274, 151, 2)
-  //  rect(25, 325, 151, 2)
+    //  rect(25, 274, 151, 2)
+    //  rect(25, 325, 151, 2)
     // right plat
-//    rect(624, 274, 151, 2)
-  //  rect(624, 325, 151, 2)
+    //    rect(624, 274, 151, 2)
+    //  rect(624, 325, 151, 2)
 
     // call the player object methods
     me.frame(othersIdx, otherPlayers);
 
     for (var i = 0; i < othersIdx.length; i++) {
         if (otherPlayers[othersIdx[i]]) {
-
             otherPlayers[othersIdx[i]].frame();
         }
     }
@@ -142,6 +144,7 @@ socket.on("player_data", function(player_data) {
                 playerCurr.attackpos.x = playerServer.fistPos.x;
                 playerCurr.runidx = playerServer.runidx;
                 playerCurr.runidy = playerServer.runidy;
+                playerCurr.gravity = playerServer.gravity;
             }
         }
     }
@@ -150,7 +153,7 @@ socket.on("player_data", function(player_data) {
 
 socket.on('hit player', function(data) {
     me.pos.y = 0;
-    healthLeft-= 22;
+    healthLeft -= 22;
     console.log(data);
     console.log(healthLeft);
 
