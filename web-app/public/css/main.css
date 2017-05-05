@@ -55,10 +55,11 @@ h1 {
 
 h2 {
   font-family: 'Oswald', sans-serif;
-  font-size: 4em;
-  /* Cant get this to change size at all!! */
-  color: #544b5e;
-  word-spacing: .1em;
+  color: white;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: .6em;
+  text-align: center;
 }
 
 h3 {
@@ -79,7 +80,7 @@ p {
   text-align: justify;
   text-decoration-color: white;
   text-indent: 20px;
-  padding: 10px;
+  padding: 20px;
 }
 
 a {
@@ -124,8 +125,9 @@ p:first-letter {
 }
 
 #body {
-  min-height: 400px;
+  /*min-height: 400px;*/
   margin-top: 3%;
+  margin-bottom: 3%;
 }
 
 #footer {
@@ -191,14 +193,12 @@ ul#menu li a:hover {
   body {
     font-size: 12px;
   }
-
   ul#menu {
     padding: 0;
   }
   ul#menu li {
     font-size: 12px;
     display: flex;
-
   }
   ul#menu li a {
     width: 100%;
