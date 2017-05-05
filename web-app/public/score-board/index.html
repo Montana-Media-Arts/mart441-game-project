@@ -61,14 +61,15 @@
     }
 
     function addScore(){
-      var name, score, date, pos, arr, Name;
+      var name, score, date, pos, arr, read;
 
       arr = document.getElementById("topscores");
+      read = document.getElementById("topscores").lastChild.id.value;
 
       name = document.getElementById("UserName");
       score = document.getElementById("score");
       date = document.getElementById("date");
-      Name = document.getElementById("Name");
+  //    Name = document.getElementById(read."Name");
 
       //presentName = document.getElementById("UserName");
 
