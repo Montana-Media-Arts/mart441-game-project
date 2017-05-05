@@ -1,5 +1,5 @@
 body {
-  background-image: url('score/bricktexture.jpg');
+  background-image: url('images/bricktexture.jpg');
 }
 table {
   font-family: 'John Handy Let', "impact", sans-serif;
@@ -27,6 +27,7 @@ td {
 .UserName {
   color:white;
   font: 1.3em 'Charcoal', 'Arial', sans-serif;
+  padding-left: 3%;
 
 }
 
@@ -34,12 +35,13 @@ td {
   color: limegreen;
   font: 1em 'Charcoal', 'Arial', sans-serif;
   text-align: right;
-  margin: 10%;
+  padding-right: 3%;
 }
 
 .Date {
-  color: magenta;
-  font: .8em 'Charcoal', 'Arial', sans-serif;
+  color: rgb(255, 200, 245);
+  outline: 1px white;
+  font: .7em 'Charcoal', 'Arial', sans-serif;
   text-align: right;
-  margin: 0 0 0 10%;
+  padding-right: 3%;
 }
