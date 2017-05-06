@@ -9,8 +9,10 @@ var otherPlayers = {};
 var playervis;
 var oppvis;
 
-// Array for vis
-var playerColor = ["vis/yellowknight.gif", "vis/redknight.gif", "vis/purpleknight.gif", "vis/pinkknight.gif", "vis/orangeknight.gif", "vis/greenknight.gif", "vis/blueknight.gif"];
+// Array for vis- insures opponent never recieves the two special knights
+var playerColor = ["vis/yellowknight.gif", "vis/redknight.gif", "vis/purpleknight.gif", "vis/pinkknight.gif", "vis/orangeknight.gif", "vis/greenknight.gif", "vis/blueknight.gif", "vis/musicknight.gif", "vis/zedknight.gif"];
+var oppColor = ["vis/yellowknight.gif", "vis/redknight.gif", "vis/purpleknight.gif", "vis/pinkknight.gif", "vis/orangeknight.gif", "vis/greenknight.gif", "vis/blueknight.gif"];
+
 
 // Score Health Stuff
 var scoreString = "SCORE: ";
@@ -43,7 +45,7 @@ function preload() {
 
     // Handles random color
     playervis = loadImage(random(playerColor));
-    oppvis = loadImage(random(playerColor));
+    oppvis = loadImage(random(oppColor));
 }
 
 
