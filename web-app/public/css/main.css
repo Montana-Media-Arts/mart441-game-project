@@ -4,6 +4,10 @@
   font-weight: normal;
   font-style: normal;
 }
+html {
+    overflow-y:scroll;
+}
+
 
 body {
   font-family: 'Oswald', sans-serif;
