@@ -138,7 +138,7 @@ p:first-letter {
   background-color: rgba(0, 1, 70, 0.4);
   margin-left: 10%;
   margin-right: 10%;
-  outline: 5px gold groove;
+  outline: 5px rgba(213, 151, 13, 0.6) groove;
 }
 
 @viewport {
@@ -175,7 +175,7 @@ ul#menu li {
 
 ul#menu li a {
   display: block;
-  background-color: rgba(140, 143, 0, 0.6);
+  background-color: rgba(213, 151, 13, 0.6);
   color: white;
   /*padding 10px 20px;*/
   text-decoration: none;
