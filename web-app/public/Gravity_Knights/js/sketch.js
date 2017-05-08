@@ -7,7 +7,8 @@ var otherPlayers = {};
 
 // Array for vis
 var playerColor = ["vis/yellowknight.gif", "vis/redknight.gif", "vis/purpleknight.gif", "vis/pinkknight.gif", "vis/orangeknight.gif", "vis/greenknight.gif", "vis/blueknight.gif", "vis/musicknight.gif", "vis/zedknight.gif"];
-var oppColor = ["vis/yellowknight.gif", "vis/redknight.gif", "vis/purpleknight.gif", "vis/pinkknight.gif", "vis/orangeknight.gif", "vis/greenknight.gif", "vis/blueknight.gif"];
+var playerImg = [];
+// var oppColor = ["vis/yellowknight.gif", "vis/redknight.gif", "vis/purpleknight.gif", "vis/pinkknight.gif", "vis/orangeknight.gif", "vis/greenknight.gif", "vis/blueknight.gif"];
 
 
 // Score Health Stuff
@@ -43,6 +44,10 @@ var enterName;
 // Loads Visuals
 function preload() {
     level = loadImage("vis/map2.jpg");
+
+    // for (var i = 0; i < playerColor.length; i++) {
+//     playerImg.push( loadImage(path,successCallback,failureCallback))
+// }
 }
 
 

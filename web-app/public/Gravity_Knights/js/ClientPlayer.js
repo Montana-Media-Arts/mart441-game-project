@@ -15,8 +15,9 @@ class ClientPlayer {
         this.runidy = 0;
         this.runipos = [95, 190, 285, 380, 475, 570, 665, 760, /*jumps*/ 855, 0];
         this.runrate = 5;
+        this.loaded = false;
         this.playervis = playervis;
-        this.sprite = loadImage(playervis);
+        this.sprite = null;
 
         // Unique player ID
         this.idx = myIdx;
@@ -119,7 +120,12 @@ class ClientPlayer {
         // Player Sprites
         if (this.gravity.y == -1)
             scale(-1, 1);
-        image(this.sprite, -this.size / 2, -this.size / 2, 95, 73, this.runipos[this.runidx], this.runidy, 95, 73);
+
+        if (this.loaded) {
+            image(this.sprite, -this.size / 2, -this.size / 2, 95, 73, this.runipos[this.runidx], this.runidy, 95, 73);
+        } else {
+            this.loadSprite();
+        }
 
         // For Player Health
         // Health Lost- must be positioned here.
@@ -430,6 +436,13 @@ class ClientPlayer {
         // console.log(this.playerScore);
     }
 
+
+    loadSprite() {
+        this.sprite = loadImage(
+            this.playervis
+        );
+        this.loaded = true;
+    }
 
 
     emit() {

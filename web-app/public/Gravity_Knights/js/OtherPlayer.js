@@ -27,6 +27,8 @@ class OtherPlayer {
         // size should be 0-100
         this.size = 100;
 
+        this.loaded = false;
+
         this.emitData = {
             playervis: this.playervis,
             idx: this.idx,
@@ -59,10 +61,12 @@ class OtherPlayer {
     display() {
         // console.log("trying to rendering other player");
         if (this.playervis == 0) return;
-        console.log(this.playervis);
-        if (!this.sprite && !this.playervis) {
-            this.sprite = loadImage(this.playervis);
-        };
+
+        if (!this.sprite) {
+            this.loadSprite();
+        } else {
+            this.loaded = true;
+        }
         // console.log("rendering other player");
         // Draw the otherplayer
         push();
@@ -77,7 +81,9 @@ class OtherPlayer {
         else if (this.gravity.x == -1)
             rotate(PI / 2);
 
-        image(this.sprite, -this.size / 2, -this.size / 2, 95, 73, this.runipos[this.runidx], this.runidy, 95, 73);
+        if (this.loaded) {
+            image(this.sprite, -this.size / 2, -this.size / 2, 95, 73, this.runipos[this.runidx], this.runidy, 95, 73);
+        }
         //if (this.playerScore == 0){
         //  oppvis = null;
         // }
@@ -95,6 +101,12 @@ class OtherPlayer {
 
         pop();
 
+    }
+
+    loadSprite() {
+        this.sprite = loadImage(
+            this.playervis
+        );
     }
 
 }
