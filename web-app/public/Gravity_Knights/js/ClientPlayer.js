@@ -146,10 +146,21 @@ this.botGrav=true
 
             // Score alert- to send initials to text document later
             // needs work
-            // prompt("YOU DIED! YOUR SCORE WAS- " + this.playerScore + " REFRESH TO TRY AGAIN", "Submit Score? Initials Here!");
+            var enterName = prompt("YOU DIED! YOUR SCORE WAS- " + this.playerScore + " REFRESH TO TRY AGAIN", "Submit Score? Initials Here!");
 
+            enterName;
+            // playervis = null;
             // Can no longer inflict damage- prevents ghost damage
-            this.canPunch = false;
+            // this.canPunch = false;
+            // this.canMove = false;
+            // this.emitData.pos.x = null;
+            // this.emitData.pos.y = null;
+
+            if (enterName != null){
+              disconnect_id();
+              this.emitData.size = null;
+              playervis = null;
+            }
         }
         pop();
     }

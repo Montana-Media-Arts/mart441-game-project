@@ -8,6 +8,7 @@ class OtherPlayer {
         this.runipos = [95, 190, 285, 380, 475, 570, 665, 760, /*jumps*/ 855, 0];
         this.runrate = 5;
         this.playervis = oppvis;
+        this.playerScore;
 
 
         this.pos = createVector(800 / 2, 600 - 100);
@@ -70,6 +71,9 @@ class OtherPlayer {
             rotate(PI / 2);
 
         image(this.playervis, -this.size / 2, -this.size / 2, 95, 73, this.runipos[this.runidx], this.runidy, 95, 73);
+        if (this.playerScore == 0){
+          oppvis = null;
+        }
 
         // For Other Player Health- purely graphical right now
         // Health Lost- must be positioned here.
