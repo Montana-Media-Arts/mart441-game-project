@@ -59,6 +59,7 @@ class OtherPlayer {
     display() {
         // console.log("trying to rendering other player");
         if (this.playervis == 0) return;
+        console.log(this.playervis);
         if (!this.sprite && !this.playervis) {
             this.sprite = loadImage(this.playervis);
         };
