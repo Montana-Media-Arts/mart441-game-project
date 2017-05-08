@@ -141,7 +141,7 @@ class ClientPlayer {
 
             // Score alert- to send initials to text document later
             // needs work
-            enterName = prompt("YOU DIED! YOUR SCORE WAS- " + this.playerScore + " REFRESH TO TRY AGAIN", "Submit Score? Initials Here!");
+            // enterName = prompt("YOU DIED! YOUR SCORE WAS- " + this.playerScore + " REFRESH TO TRY AGAIN", "Submit Score? Initials Here!");
 
             enterName;
             // playervis = null;
