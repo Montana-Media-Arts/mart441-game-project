@@ -5,11 +5,7 @@ var myIdx;
 var othersIdx = [];
 var otherPlayers = {};
 
-// Player Vis stuff
-var playervis;
-var oppvis;
-
-// Array for vis- insures opponent never recieves the two special knights
+// Array for vis
 var playerColor = ["vis/yellowknight.gif", "vis/redknight.gif", "vis/purpleknight.gif", "vis/pinkknight.gif", "vis/orangeknight.gif", "vis/greenknight.gif", "vis/blueknight.gif", "vis/musicknight.gif", "vis/zedknight.gif"];
 var oppColor = ["vis/yellowknight.gif", "vis/redknight.gif", "vis/purpleknight.gif", "vis/pinkknight.gif", "vis/orangeknight.gif", "vis/greenknight.gif", "vis/blueknight.gif"];
 
@@ -23,17 +19,17 @@ var healthLeft = 66;
 var ophealthLeft = 66;
 
 var platformrect = [{
-    x: 315,
+    x: 345 - 95 / 2 + 20,
     y: 187,
-    width: 115,
-    height: 221
+    width: 105,
+    height: 224
 }, {
-    x: 25,
+    x: 25 - 95 / 2,
     y: 274,
-    width: 127,
+    width: 150,
     height: 51
 }, {
-    x: 590,
+    x: 630 - 95 / 2,
     y: 274,
     width: 151,
     height: 51
@@ -41,16 +37,12 @@ var platformrect = [{
 
 //enterName for disconnect;
 
-  var enterName;
+var enterName;
 
 
 // Loads Visuals
 function preload() {
     level = loadImage("vis/map2.jpg");
-
-    // Handles random color
-    playervis = loadImage(random(playerColor));
-    oppvis = loadImage(random(oppColor));
 }
 
 
@@ -58,7 +50,7 @@ function preload() {
 function setup() {
     createCanvas(800, 600);
 
-    me = new ClientPlayer(playervis, myIdx);
+    me = new ClientPlayer(random(playerColor), myIdx);
     console.log(me);
 }
 
@@ -67,21 +59,18 @@ function setup() {
 function draw() {
     image(level, 0, 0);
 
-    //for (var i = 0; i < platformrect.length; i++)
-    //	rect (platformrect[i].x, platformrect[i].y, platformrect[i].width, platformrect[i].height);
-
     // Refs for plat boxes
-    // mid boxes
+    // Mid boxes
     //  rect(350, 408, 100, 2)
     //  rect(350, 187, 100, 2)
     // left plat
     //  rect(25, 274, 151, 2)
     //  rect(25, 325, 151, 2)
-    // right plat
-    //    rect(624, 274, 151, 2)
+    // Right plat
+    //   rect(624, 274, 151, 2)
     //  rect(624, 325, 151, 2)
 
-    // call the player object methods
+    // Call the player object methods
     me.frame(othersIdx, otherPlayers);
 
     for (var i = 0; i < othersIdx.length; i++) {
@@ -143,6 +132,7 @@ socket.on("player_data", function(player_data) {
             playerCurr = otherPlayers[othersIdx[i]];
 
             if (playerServer && playerCurr) {
+                playerCurr.playervis = playerServer.playervis;
                 playerCurr.size = playerServer.size;
                 playerCurr.pos.x = playerServer.pos.x;
                 playerCurr.pos.y = playerServer.pos.y;
@@ -168,7 +158,6 @@ socket.on('hit player', function(data) {
 });
 
 socket.on("disconnect_player", function(disconnect_id) {
-
     othersIdx.splice(disconnect_id, 1);
     delete otherPlayers[disconnect_id.toString()];
 });

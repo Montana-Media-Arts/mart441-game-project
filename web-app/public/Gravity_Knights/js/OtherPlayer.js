@@ -7,7 +7,6 @@ class OtherPlayer {
         this.runidy = 0;
         this.runipos = [95, 190, 285, 380, 475, 570, 665, 760, /*jumps*/ 855, 0];
         this.runrate = 5;
-        this.playervis = oppvis;
         this.playerScore;
 
 
@@ -23,12 +22,13 @@ class OtherPlayer {
         this.ground = 600 - 100;
         this.velocity = 0;
         this.gravity = 1;
-
+        this.playervis = 0;
 
         // size should be 0-100
         this.size = 100;
 
         this.emitData = {
+            playervis: this.playervis,
             idx: this.idx,
             pos: {
                 x: 0,
@@ -57,6 +57,12 @@ class OtherPlayer {
     }
 
     display() {
+        console.log("trying to rendering other player");
+        if (this.playervis == 0) return;
+        if (!this.sprite) {
+            this.sprite = loadImage(this.playervis);
+        };
+        console.log("rendering other player");
         // Draw the otherplayer
         push();
 
@@ -70,10 +76,10 @@ class OtherPlayer {
         else if (this.gravity.x == -1)
             rotate(PI / 2);
 
-        image(this.playervis, -this.size / 2, -this.size / 2, 95, 73, this.runipos[this.runidx], this.runidy, 95, 73);
-        if (this.playerScore == 0){
-          oppvis = null;
-        }
+        image(this.sprite, -this.size / 2, -this.size / 2, 95, 73, this.runipos[this.runidx], this.runidy, 95, 73);
+        //if (this.playerScore == 0){
+        //  oppvis = null;
+        // }
 
         // For Other Player Health- purely graphical right now
         // Health Lost- must be positioned here.

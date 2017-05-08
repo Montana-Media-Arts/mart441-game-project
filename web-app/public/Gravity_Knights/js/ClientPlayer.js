@@ -3,18 +3,12 @@
 class ClientPlayer {
 
     constructor(playervis, myIdx) {
-//keycodes
-//w=87 a=65 s=83 d=68
-this.leftKey=65
-this.rightKey=68
-this.jumpKey=87
-this.botKey=83
-
-//gravity
-this.leftGrav=false
-this.rightGrav=false
-this.topGrav=false
-this.botGrav=true
+        // Keycodes for Reference
+        // w = 87 a = 65 s = 83 d = 68
+        this.leftKey = 65
+        this.rightKey = 68
+        this.jumpKey = 87
+        this.botKey = 83
 
         // Player skin
         this.runidx = 5;
@@ -22,7 +16,7 @@ this.botGrav=true
         this.runipos = [95, 190, 285, 380, 475, 570, 665, 760, /*jumps*/ 855, 0];
         this.runrate = 5;
         this.playervis = playervis;
-
+        this.sprite = loadImage(playervis);
 
         // Unique player ID
         this.idx = myIdx;
@@ -74,6 +68,7 @@ this.botGrav=true
         this.hitsLanded = 0;
 
         this.emitData = {
+            playervis: this.playervis,
             idx: this.idx,
             pos: {
                 x: 0,
@@ -124,7 +119,7 @@ this.botGrav=true
         // Player Sprites
         if (this.gravity.y == -1)
             scale(-1, 1);
-        image(this.playervis, -this.size / 2, -this.size / 2, 95, 73, this.runipos[this.runidx], this.runidy, 95, 73);
+        image(this.sprite, -this.size / 2, -this.size / 2, 95, 73, this.runipos[this.runidx], this.runidy, 95, 73);
 
         // For Player Health
         // Health Lost- must be positioned here.
@@ -156,10 +151,10 @@ this.botGrav=true
             // this.emitData.pos.x = null;
             // this.emitData.pos.y = null;
 
-            if (enterName != null){
-              disconnect_id();
-              this.emitData.size = null;
-              playervis = null;
+            if (enterName != null) {
+                disconnect_id();
+                this.emitData.size = null;
+                playervis = null;
             }
         }
         pop();
@@ -243,14 +238,14 @@ this.botGrav=true
             }
         }
 
-        // visuals
+        // Visuals
         if (this.isjumping = true && keyIsDown(87) && this.direction == 0)
             this.runidx = 8;
         if (this.isjumping = true && keyIsDown(87) && this.direction == 1)
             this.runidx = 9;
 
 
-        //Jump
+        // Jump
         if (keyIsDown(this.jumpKey) && this.grounded) {
             this.grounded = false;
             if (this.gravity.y == 1)
@@ -268,33 +263,39 @@ this.botGrav=true
         }
 
 
-        //Collisions
-        var col = false;
+        // Collisions
         for (var i = 0; i < platformrect.length; i++)
-            if (platformrect[i].x < this.pos.x + this.velocity.x + this.pwidth &&
+            if (platformrect[i].x < this.pos.x + this.pwidth + this.velocity.x &&
                 platformrect[i].x + platformrect[i].width > this.pos.x + this.velocity.x &&
-                platformrect[i].y < this.pos.y + this.velocity.y + this.pheight &&
-                platformrect[i].height + platformrect[i].y > this.pos.y + this.velocity.y) {
+                platformrect[i].y < this.pos.y + this.pheight + this.velocity.y + this.velocity.y &&
+                platformrect[i].height + platformrect[i].y > this.pos.y) {
 
-                //Horizontal collision
-                if (platformrect[i].x < this.pos.x + this.pwidth &&
-                    platformrect[i].x < this.pos.x + 10) {
-                    if (this.gravity.y == 0) {
+                if (this.pos.y < platformrect[i].y && this.pos.y + this.pheight > platformrect[i].y) { //top side collision
+                    if (this.gravity.y == 1)
                         this.grounded = true;
-                        this.velocity.x = 0;
-                    } else
+                    if (this.velocity.y > 0)
                         this.velocity.y = 0;
-                    col = true;
                 }
-                //Vertical Collision
-                if (platformrect[i].x < this.pos.x + this.pwidth &&
-                    platformrect[i].x < this.pos.x + 10) {
-                    if (this.gravity.x == 0) {
+
+                if (this.pos.x < platformrect[i].x && this.pos.x + this.pwidth > platformrect[i].x) { //left side collision
+                    if (this.gravity.x == 1)
                         this.grounded = true;
-                        this.velocity.y = 0;
-                    } else
+                    if (this.velocity.x > 0)
                         this.velocity.x = 0;
-                    col = true;
+                }
+
+                if (this.pos.x < platformrect[i].x + platformrect[i].width && this.pos.x + this.pwidth > platformrect[i].x + platformrect[i].width) { //right side collision
+                    if (this.gravity.x == -1)
+                        this.grounded = true;
+                    if (this.velocity.x < 0)
+                        this.velocity.x = 0;
+                }
+
+                if (this.pos.y < platformrect[i].y + platformrect[i].height && this.pos.y + this.pheight > platformrect[i].y + platformrect[i].height) { //bot side collision
+                    if (this.gravity.y == -1)
+                        this.grounded = true;
+                    if (this.velocity.y < 0)
+                        this.velocity.y = 0;
                 }
             }
 
@@ -302,101 +303,84 @@ this.botGrav=true
         this.pos.y += this.velocity.y;
         this.pos.x += this.velocity.x;
 
-        //Outside Collisions (edges of map)
-        if (this.pos.y >= this.ground) {
-            this.grounded = true;
-            this.velocity.x = 0;
-            this.velocity.y = 0;
-            this.pos.y = this.ground;
-        }
-
+        // Outside Collisions (edges of map)
         if (this.pos.y <= 0) {
-            this.grounded = true;
-            this.velocity.x = 0;
-            this.velocity.y = 0;
+            if (this.gravity.y == -1) {
+                this.grounded = true;
+                this.velocity.y = 0;
+            }
             this.pos.y = 0;
         }
 
-        if (this.pos.x >= width - this.size) {
-            this.grounded = true;
-            this.velocity.x = 0;
-            this.velocity.y = 0;
-            this.pos.x = width - this.size + 1;
+        if (this.pos.y >= this.ground) {
+            if (this.gravity.y == 1) {
+                this.grounded = true;
+                this.velocity.y = 0;
+            }
+            this.pos.y = this.ground;
         }
 
-        if (this.pos.x <= 0) {
-            this.grounded = true;
-            this.velocity.x = 0;
-            this.velocity.y = 0;
+        if (this.pos.x >= width - this.size) {
+            if (this.gravity.x == 1) {
+                this.grounded = true;
+                this.velocity.x = 0;
+            }
+            this.pos.x = width - this.size;
+        }
+
+        if (this.pos.x <= 3) {
+            if (this.gravity.x == -1) {
+                this.grounded = true;
+                this.velocity.x = 0;
+            }
             this.pos.x = 3;
         }
 
-        //Gravity
+        // Gravity
 
-        //resets controls
-if (this.leftGrav==true) {
-  this.rightGrav=false
-  this.topGrav=false
-  this.botGrav=false
-  this.leftKey=87
-  this.rightKey=83
-  this.jumpKey=68
-}
-if (this.rightGrav==true) {
-  this.leftGrav=false
-  this.topGrav=false
-  this.botGrav=false
-  this.leftKey=83
-  this.rightKey=87
-  this.jumpKey=65
-}
-if (  this.topGrav==true) {
-  this.leftGrav=false
-  this.rightGrav=false
-  this.botGrav=false
-  this.leftKey=65
-  this.rightKey=68
-  this.jumpKey=83
-}
-if (this.botGrav==true) {
-  this.leftGrav=false
-  this.rightGrav=false
-  this.topGrav=false
-  this.leftKey=65
-  this.rightKey=68
-  this.jumpKey=87
-}
+        // resets controls
+        if (this.gravity.x == 1) {
+            this.leftKey = 83;
+            this.rightKey = 87;
+            this.jumpKey = 65;
+        } else if (this.gravity.y == 1) {
+            this.leftKey = 65;
+            this.rightKey = 68;
+            this.jumpKey = 87;
+        } else if (this.gravity.y == -1) {
+            this.leftKey = 65;
+            this.rightKey = 68;
+            this.jumpKey = 83;
+        } else if (this.gravity.x == -1) {
+            this.leftKey = 87;
+            this.rightKey = 83;
+            this.jumpKey = 68;
+        }
 
 
-
-
-        //top up
+        // Top up
         if (keyIsDown(38) && !this.upPressed) {
-          this.topGrav=true
             this.gravity.y = -1;
             this.gravity.x = 0;
             this.upPressed = true;
         } else if (!keyIsDown(38))
             this.upPressed = false;
-//down
+        // Down
         if (keyIsDown(40) && !this.downPressed) {
-          this.botGrav=true
             this.gravity.y = 1;
             this.gravity.x = 0;
             this.downPressed = true;
         } else if (!keyIsDown(40))
             this.downPressed = false;
-//left
+        // left
         if (keyIsDown(37) && !this.leftPressed) {
-          this.leftGrav=true
             this.gravity.x = -1;
             this.gravity.y = 0;
             this.leftPressed = true;
         } else if (!keyIsDown(38))
             this.leftPressed = false;
-//right
+        // Right
         if (keyIsDown(39) && !this.rightPressed) {
-          this.rightGrav=true
             this.gravity.x = 1;
             this.gravity.y = 0;
             this.rightPressed = true;
@@ -450,6 +434,7 @@ if (this.botGrav==true) {
 
     emit() {
         // Update values
+        this.emitData.playervis = this.playervis;
         this.emitData.pos.x = this.pos.x;
         this.emitData.pos.y = this.pos.y;
         this.emitData.healthLeft = healthLeft;
